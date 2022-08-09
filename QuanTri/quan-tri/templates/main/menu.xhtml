@@ -1,0 +1,43 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<body>
+<ui:composition>
+    <div class="card">
+        <h:form>
+            <p:panelMenu style="width:300px">
+                <p:submenu label="KHÁCH HÀNG" >
+                    <p:menuitem value="Danh sách khách hàng" outcome="/manager/customer/customer-list.xhtml" icon="pi pi-list"/>
+                    <p:menuitem value="item3" action="#{Massage.showInfo('item3')}" icon="pi pi-times"/>
+                </p:submenu>
+                <p:submenu label="SẢN PHẨM">
+                    <p:menuitem value="Danh sách sản phẩm" action="#{Massage.showInfo('action1')}" icon="pi pi-list"/>
+                    <p:menuitem value="action2" action="#{Massage.showInfo('action2')}" icon="pi pi-upload"/>
+                </p:submenu>
+                <p:submenu label="ORDER DOCKET">
+                    <p:menuitem value="action1" action="#{Massage.showInfo('action1')}" icon="pi pi-external-link"/>
+                    <p:menuitem value="action2" action="#{Massage.showInfo('action2')}" icon="pi pi-upload"/>
+                </p:submenu>
+                <p:submenu label="IMPORT DOCKET">
+                    <p:menuitem value="item1" action="#{Massage.showInfo('item1')}" icon="pi pi-save"/>
+                    <p:menuitem value="item2" action="#{Massage.showInfo('item2')}" icon="pi pi-refresh"/>
+                    <p:menuitem value="item3" action="#{Massage.showInfo('item3')}" icon="pi pi-times"/>
+                </p:submenu>
+                <p:submenu label="EXPORT DOCKET">
+                    <p:menuitem value="action1" action="#{Massage.showInfo('action1')}" icon="pi pi-external-link"/>
+                    <p:menuitem value="action2" action="#{Massage.showInfo('action2')}" icon="pi pi-upload"/>
+                </p:submenu>
+                <p:submenu label="DELIVERY DOCKET">
+                    <p:menuitem value="action1" action="#{Massage.showInfo('action1')}" icon="pi pi-external-link"/>
+                    <p:menuitem value="action2" action="#{Massage.showInfo('action2')}" icon="pi pi-upload"/>
+                </p:submenu>
+            </p:panelMenu>
+        </h:form>
+    </div>
+</ui:composition>
+</body>
+</html>
