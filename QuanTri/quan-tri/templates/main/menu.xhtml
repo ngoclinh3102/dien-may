@@ -7,33 +7,33 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <body>
 <ui:composition>
-    <div class="card">
+    <div>
         <h:form>
             <p:panelMenu style="width:300px">
                 <p:submenu label="KHÁCH HÀNG" >
                     <p:menuitem value="Danh sách khách hàng" outcome="/manager/customer/customer-list.xhtml" icon="pi pi-list"/>
-                    <p:menuitem value="item3" action="#{Massage.showInfo('item3')}" icon="pi pi-times"/>
+                    <p:menuitem value="item3" action="#{Message.showInfo('item3')}" icon="pi pi-times"/>
                 </p:submenu>
                 <p:submenu label="SẢN PHẨM">
-                    <p:menuitem value="Danh sách sản phẩm" action="#{Massage.showInfo('action1')}" icon="pi pi-list"/>
-                    <p:menuitem value="action2" action="#{Massage.showInfo('action2')}" icon="pi pi-upload"/>
+                    <p:menuitem value="Danh sách sản phẩm" outcome="/manager/product/product-list.xhtml" icon="pi pi-list"/>
+                    <p:menuitem value="Thêm sản phẩm" outcome="/manager/product/product-create.xhtml" icon="pi pi-plus"/>
                 </p:submenu>
                 <p:submenu label="ORDER DOCKET">
-                    <p:menuitem value="action1" action="#{Massage.showInfo('action1')}" icon="pi pi-external-link"/>
-                    <p:menuitem value="action2" action="#{Massage.showInfo('action2')}" icon="pi pi-upload"/>
+                    <p:menuitem value="action1" action="#{Message.showInfo('action1')}" icon="pi pi-external-link"/>
+                    <p:menuitem value="action2" action="#{Message.showInfo('action2')}" icon="pi pi-upload"/>
                 </p:submenu>
                 <p:submenu label="IMPORT DOCKET">
-                    <p:menuitem value="item1" action="#{Massage.showInfo('item1')}" icon="pi pi-save"/>
-                    <p:menuitem value="item2" action="#{Massage.showInfo('item2')}" icon="pi pi-refresh"/>
-                    <p:menuitem value="item3" action="#{Massage.showInfo('item3')}" icon="pi pi-times"/>
+                    <p:menuitem value="item1" action="#{Message.showInfo('item1')}" icon="pi pi-save"/>
+                    <p:menuitem value="item2" action="#{Message.showInfo('item2')}" icon="pi pi-refresh"/>
+                    <p:menuitem value="item3" action="#{Message.showInfo('item3')}" icon="pi pi-times"/>
                 </p:submenu>
                 <p:submenu label="EXPORT DOCKET">
-                    <p:menuitem value="action1" action="#{Massage.showInfo('action1')}" icon="pi pi-external-link"/>
-                    <p:menuitem value="action2" action="#{Massage.showInfo('action2')}" icon="pi pi-upload"/>
+                    <p:menuitem value="action1" action="#{Message.showInfo('action1')}" icon="pi pi-external-link"/>
+                    <p:menuitem value="action2" action="#{Message.showInfo('action2')}" icon="pi pi-upload"/>
                 </p:submenu>
                 <p:submenu label="DELIVERY DOCKET">
-                    <p:menuitem value="action1" action="#{Massage.showInfo('action1')}" icon="pi pi-external-link"/>
-                    <p:menuitem value="action2" action="#{Massage.showInfo('action2')}" icon="pi pi-upload"/>
+                    <p:menuitem value="action1" action="#{Message.showInfo('action1')}" icon="pi pi-external-link"/>
+                    <p:menuitem value="action2" action="#{Message.showInfo('action2')}" icon="pi pi-upload"/>
                 </p:submenu>
             </p:panelMenu>
         </h:form>

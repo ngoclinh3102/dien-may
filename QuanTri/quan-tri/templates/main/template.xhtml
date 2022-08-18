@@ -10,24 +10,26 @@
     <title>
         <ui:insert name="title">default title</ui:insert>
     </title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
+    <ui:insert name="stylesheet">
+        <link rel="stylesheet" href="../../resources/css/style.css"/>
+    </ui:insert>
     <p:growl id="growlMessage" showDetail="true">
         <p:autoUpdate/>
     </p:growl>
 </h:head>
-<h:body>
+<h:body >
     <ui:insert name="header">
         <ui:include src="header.xhtml"/>
     </ui:insert>
 
-    <table style="margin: 10px;">
+    <table style="margin: 5px;">
         <tr>
-            <td valign="top" style="padding: 0;">
+            <td valign="top">
                 <ui:insert name="menu">
                     <ui:include src="menu.xhtml"/>
                 </ui:insert>
             </td>
-            <td width="100%" valign="top" style="padding: 0;">
+            <td width="100%" valign="top">
                 <ui:insert name="content"/>
             </td>
         </tr>

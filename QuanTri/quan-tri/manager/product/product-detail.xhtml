@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/main/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="title">product-detail.xhtml</ui:define>
+    <ui:define name="content">
+        <h:form id="frmMain"  enctype="multipart/form-data">
+            <div class="card-header">
+                <p:outputLabel value="THÔNG TIN SẢN PHẨM"/>
+            </div>
+            <div class="card ui-g">
+                <div class="ui-lg-5">
+                    hre
+                </div>
+                <div class="ui-lg-7">
+                    eh
+                </div>
+
+
+
+
+
+
+
+
+                <p:fileUpload value="#{ProductCreateBean.file}" mode="simple" skinSimple="true" messageTemplate=" "
+                              update="frmMain"/>
+
+                <p:commandButton value="Submit" action="#{ProductCreateBean.submit()}"
+                                 update="frmMain"
+                                 styleClass="mt-3 ui-button-outlined block"/>
+
+                <p:graphicImage name="#{ProductCreateBean.image}" library="image" width="200px"/>
+                <h:panelGroup>
+                    <img src="../../resources/image/c001.jpg" height="50px"/>
+                </h:panelGroup>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

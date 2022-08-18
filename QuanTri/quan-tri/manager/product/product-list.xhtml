@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/main/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">DS Sản phẩm</ui:define>
+    <ui:define name="content">
+        <h:form id="frmMain">
+            <div class="card-header">
+                <h:outputText value="DANH SÁCH SẢN PHẨM"/>
+            </div>
+            <p:dataTable id="tblProductList" widgetVar="tblProductList"
+                         value="#{ProductListBean.products}" var="product"
+                         emptyMessage="Không tìm thấy dữ liệu sản phẩm."
+                         paginator="true" paginatorPosition="bottom" rows="15">
+                <p:column headerText="ID" width="5%">
+                    <a href="product-detail.xhtml?id=#{product.code}">
+                        <h:outputText value="#{product.code}"/>
+                    </a>
+                </p:column>
+                <p:column headerText="Tên sản phẩm" width="30%">
+                    <h:outputText value="#{product.name}"/>
+                </p:column>
+                <p:column headerText="Tồn kho" width="10%">
+                    <h:outputText value="#{product.inventory}"/>
+                </p:column>
+                <p:column headerText="Đơn giá">
+                    <h:outputText value="#{product.price}" width="15%"/>
+                </p:column>
+                <p:column headerText="Trạng thái">
+                    <h:outputText value="#{product.status ? 'Sẵn sàng' : 'Tạm khóa'}" width="15%"/>
+                </p:column>
+                <p:column>
+                    <a href="product-detail.xhtml?id=#{product.code}" style="float: right;">
+                        Chi tiết
+                    </a>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -20,7 +20,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="JBoss 24.0.1.Final" level="application_server_libraries" />
-    <orderEntry type="library" name="javax.faces-2.4.0" level="project" />
     <orderEntry type="library" name="primefaces-10.0.0" level="project" />
+    <orderEntry type="library" name="primeflex" level="application" />
+    <orderEntry type="library" name="mysql-connector-java-8.0.28" level="project" />
+    <orderEntry type="library" name="javaee-api-7.0" level="project" />
   </component>
 </module>

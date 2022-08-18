@@ -1,11 +1,16 @@
 package utils;
 
+/*
+    Author      : Ngoc Linh, Vu
+    Last modify : 2022/08/15
+*/
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-@ManagedBean(name = "Massage")
+@ManagedBean(name = "Message")
 @RequestScoped
 public class Message {
 

@@ -8,8 +8,9 @@
           <element id="module-output" name="QuanTri" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="javax.faces-2.4.0" />
           <element id="library" level="project" name="primefaces-10.0.0" />
+          <element id="library" level="project" name="mysql-connector-java-8.0.28" />
+          <element id="library" level="project" name="javaee-api-7.0" />
         </element>
       </element>
     </root>

@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/main/template.xhtml"
+                xmlns:compo="http://java.sun.com/jsf/composite/component/record"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="title">Thông tin khách hàng</ui:define>
+    <ui:define name="content">
+        <h:form id="form">
+            <div class="card-header">
+                THÔNG TIN KHÁCH HÀNG
+            </div>
+            <div class="card ui-g">
+                <div class="ui-lg-4">
+                    <p:graphicImage name="#{CustomerDetailBean.customer.avatar}" library="image" width="200px"/>
+                </div>
+                <div class="ui-lg-8">
+                    <table class="info-box">
+                        <tbody>
+                        <compo:info name="ID" value="#{CustomerDetailBean.customer.id}"/>
+                        <compo:info name="Họ tên" value="#{CustomerDetailBean.customer.firstName} #{CustomerDetailBean.customer.lastName}"/>
+                        <compo:info name="Ngày sinh" value="#{CustomerDetailBean.customer.birthday}"/>
+                        <compo:info name="Điện thoại" value="#{CustomerDetailBean.customer.phone}"/>
+                        <compo:info name="Email" value="#{CustomerDetailBean.customer.mail}"/>
+                        <compo:editable-password value="#{CustomerDetailBean.customer.password}"/>
+                        <compo:status value="#{CustomerDetailBean.customer.status}"/>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <p:commandButton value="Cập nhật" action="#{CustomerDetailBean.actionPutCustomer()}" styleClass="submit-btn"/>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -6,12 +6,41 @@
                 template="/templates/main/template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="title">Danh sách khách hàng</ui:define>
+    <ui:define name="title">DS Khách hàng</ui:define>
     <ui:define name="content">
-        <form>
-            <div class="dataTable-header">
+        <form id="frmMain">
+            <div class="card-header">
                 <p:outputLabel value="DANH SÁCH KHÁCH HÀNG"/>
+                <p:linkButton href="customer-create.xhtml"
+                              icon="pi pi-plus" style="float: right;"/>
             </div>
+            <p:dataTable id="tblCustomerList" widgetVar="tblCustomerList"
+                         value="#{CustomerListBean.customers}" var="customer"
+                         emptyMessage="Không tìm thấy dữ liệu Khách hàng."
+                         paginator="true" paginatorPosition="bottom" rows="15">
+                <p:column headerText="ID" width="10px">
+                    <a href="customer-detail.xhtml?id=#{customer.id}">
+                        <h:outputText value="#{customer.id}"/>
+                    </a>
+                </p:column>
+                <p:column headerText="Họ tên">
+                    <h:outputText value="#{customer.firstName} #{customer.lastName}"/>
+                </p:column>
+                <p:column headerText="SĐT">
+                    <h:outputText value="#{customer.phone}"/>
+                </p:column>
+                <p:column headerText="Mail">
+                    <h:outputText value="#{customer.mail}"/>
+                </p:column>
+                <p:column headerText="Trạng thái">
+                    <h:outputText value="#{customer.status ? 'Đang hoạt động' : 'Tạm khóa'}"/>
+                </p:column>
+                <p:column>
+                    <a href="customer-detail.xhtml?id=#{customer.id}" style="float: right;">
+                        Chi tiết
+                    </a>
+                </p:column>
+            </p:dataTable>
         </form>
     </ui:define>
 </ui:composition>

@@ -2,19 +2,17 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: #dcdde1;
-}
-
-.btn-create {
-
+    background: lightgray;
 }
 
 .div-header {
-    padding: 0;
-    width: 100%;
-    background-color: #FFBC80;
-    font-size: 1.2rem;
-    font-weight: bold;
+    background: #4a90e2;
+    padding: 1px;
+}
+
+.div-header h1 {
+    margin-left: 10%;
+    color: whitesmoke;
 }
 
 .dataTable-header {
@@ -22,7 +20,7 @@ body {
     width: 100%;
     font-weight: bold;
     font-size: 1rem;
-    background-color: lightslategrey;
+    background: #1c80cf;
 }
 
 .p-panel {
@@ -31,4 +29,80 @@ body {
     min-height: 425px;
     width: 100%;
     alignment: top;
+}
+
+.card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    background: #ffffff;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+.card-header {
+    width: 100%;
+    border-radius: 3px;
+    background: #1c80cf;
+    text-align: start;
+    padding: 16px;
+    font-weight: bold;
+}
+
+/*  RECORD COMPONENT */
+.info-label{
+    color: #a7a7a7;
+    vertical-align: center;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.info-sep{
+    width: 1em;
+    text-align: center;
+    vertical-align: center;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.info-content{
+    word-break: break-word;
+    vertical-align: center;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.info-box table{
+    width: 100%;
+}
+
+.editable-password {
+    padding: 0 !important;
+}
+
+/*  BUTTON */
+.submit-btn {
+}
+
+.status-toggle-switch {
+    width: 100px !important;
+}
+
+.create-btn {
+    padding: 0;
+    background-color: #4CAF50 !important;
+    float: right;
+    font-size: 20px !important;
+    height: 23px !important;
+}
+
+.return-btn {
+    height: 48px !important;
+    padding: 0 !important;
+    float: right;
+    background: coral !important;
 }
