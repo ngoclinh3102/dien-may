@@ -6,6 +6,7 @@ body {
 }
 
 .div-header {
+    height: 100px;
     background: #4a90e2;
     padding: 1px;
 }
@@ -86,6 +87,24 @@ body {
 
 /*  BUTTON */
 .submit-btn {
+    height: 50px !important;
+    width: 150px;
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    text-decoration: none !important;
+    cursor: pointer;
+    text-align: center;
+    overflow: visible;
+    float: left;
+}
+
+.delete-img-btn {
+    width: 28px !important;
+    height: 28px;
+    float: right;
+    color: darkred !important;
+    background: indianred !important;
 }
 
 .status-toggle-switch {
@@ -105,4 +124,22 @@ body {
     padding: 0 !important;
     float: right;
     background: coral !important;
+}
+
+.confirm-popup-no {
+    font-size: 0.66rem !important;
+    width: 50px !important;
+    height: 30px !important;
+    padding: 0 !important;
+    background-color: transparent !important;
+    color: #90CAF9 !important;
+    border-color: #90CAF9 !important;
+}
+
+.confirm-popup-yes {
+    margin-left: 10px;
+    font-size: 0.66rem !important;
+    width: 50px !important;
+    height: 30px !important;
+    padding: 0;
 }

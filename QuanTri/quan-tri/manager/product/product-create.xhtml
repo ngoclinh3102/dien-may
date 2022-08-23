@@ -1,45 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="/templates/main/template.xhtml"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:recordCompo="http://java.sun.com/jsf/composite/component/record">
 
     <ui:define name="title">product-create.xhtml</ui:define>
     <ui:define name="content">
-        <h:form id="frmMain"  enctype="multipart/form-data">
+
+        <h:form id="frmMain" enctype="multipart/form-data">
             <div class="card-header">
                 <p:outputLabel value="THÔNG TIN SẢN PHẨM"/>
             </div>
             <div class="card ui-g">
-                <div class="ui-lg-5">
-                    hre
+                <!--LEFT: IMAGE-->
+                <div class="ui-lg-4">
+                    <p:dataList value="#{ProductCreateBean.product.images}" var="image"
+                                type="definition"
+                                rows="1" paginator="true" paginatorPosition="bottom"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink} {LastPageLink}"
+                                currentPageReportTemplate="({startRecord} / {totalRecords})"
+                                style="width: 100%;">
+                        <f:facet name="header">
+                            Ảnh sản phẩm
+                        </f:facet>
+                        <f:facet name="description">
+                            <img src="../../resources/image/#{image}" alt="" width="100%" onclick="PF('dlgAddImage').show();"/>
+                            <p:divider/>
+                            <p:commandButton action="#{ProductCreateBean.actionDeleteImage(image)}"
+                                             update="frmMain"
+                                             icon="pi pi-trash" styleClass="delete-img-btn" >
+                                <p:confirm type="popup" header="Confirmation" message="Xóa ảnh này?" icon="fa fa-info-circle"/>
+                            </p:commandButton>
+                            <p:confirmPopup global="true" style="height: 110px; width: 200px; font-size: 0.8rem;">
+                                <p:commandButton value="Hủy" type="button" styleClass="ui-confirm-popup-no confirm-popup-no"/>
+                                <p:commandButton value="Xóa" type="button" styleClass="ui-confirm-popup-yes confirm-popup-yes" />
+                            </p:confirmPopup>
+                        </f:facet>
+                    </p:dataList>
+                    <p:commandButton value="Thêm ảnh"
+                                     onclick="PF('dlgAddImage').show();" icon="fa fa-plus"/>
                 </div>
-                <div class="ui-lg-7">
-                    eh
+                <!--RIGHT: INFORMATION-->
+                <div class="ui-lg-8 ui-g">
+                    <p:fieldset legend="Chi tiết sản phẩm" style="width: 100%;">
+                        <table class="info-box">
+                            <tbody>
+                            <recordCompo:info name="Mã sản phẩm" value="#{ProductCreateBean.product.code}"
+                                              editable="true"
+                                              style="font-weight: bold;"/>
+                            <recordCompo:info name="Tên sản phẩm" value="#{ProductCreateBean.product.name}"
+                                              editable="true"/>
+                            <recordCompo:info name="Thương hiệu" value="#{ProductCreateBean.product.brand}"
+                                              editable="true"/>
+                            <recordCompo:category name="Loại mặt hàng" value="#{ProductCreateBean.product.categoryCode}"
+                                                  editable="true"/>
+                            <recordCompo:info name="Đơn vị tính" value="#{ProductCreateBean.product.unit}"
+                                              editable="true"/>
+                            <recordCompo:info name="Số lượng tồn kho" value="#{ProductCreateBean.product.inventory}"
+                                              editable="true"
+                                              style="font-weight: bold;"/>
+                            <recordCompo:info name="Giá nhập" value="#{ProductCreateBean.product.price0}"
+                                              editable="true"/>
+                            <recordCompo:info name="Giá bán" value="#{ProductCreateBean.product.price}"
+                                              editable="true"/>
+                            <recordCompo:status value="#{ProductCreateBean.product.status}"/>
+                            <recordCompo:description name="Mô tả" value="#{ProductCreateBean.product.desc}"
+                                                     editable="true"/>
+                            </tbody>
+                        </table>
+                    </p:fieldset>
+                    <div style="width: 100%;">
+                        <p:commandButton value="Lưu" action="#{ProductCreateBean.actionPostProduct()}"
+                                         update="frmMain"
+                                         icon="pi pi-save" styleClass="submit-btn pull-right"/>
+                    </div>
                 </div>
-
-
-
-
-
-
-
-
-                <p:fileUpload value="#{ProductCreateBean.file}" mode="simple" skinSimple="true" messageTemplate=" "
-                              update="frmMain"/>
-
-                <p:commandButton value="Submit" action="#{ProductCreateBean.submit()}"
-                                 update="frmMain"
-                                 styleClass="mt-3 ui-button-outlined block"/>
-
-                <p:graphicImage name="#{ProductCreateBean.image}" library="image" width="200px"/>
-                <h:panelGroup>
-                    <img src="../../resources/image/c001.jpg" height="50px"/>
-                </h:panelGroup>
             </div>
         </h:form>
+
+        <p:dialog id="dlgAddImage" widgetVar="dlgAddImage"
+                  header="Thêm ảnh" modal="true"
+                  style="max-width: 400px;">
+            <h:form id="frmDlgAddImage" enctype="multipart/form-data">
+                <div style="margin-bottom: 10px;">
+                    <h:inputFile id="file" value="#{ProductCreateBean.image}"
+                                 accept="image/*" styleClass="ui-button">
+                        <f:ajax listener="#{ProductCreateBean.readImagePath()}" render="frmDlgAddImage"/>
+                    </h:inputFile>
+                    <img src="../../resources/image/#{ProductCreateBean.imagePath}" alt="" width="100%"/>
+                </div>
+
+                <div class="ui-g">
+                    <p:commandButton value="Hủy" onclick="PF('dlgAddImage').hide();"
+                                     style="font-size: 0.8rem; height: 36px; margin-right: 10px; background: transparent; color: #1c80cf;"/>
+                    <p:commandButton value="Thêm"
+                                     action="#{ProductCreateBean.actionPostImage()}"
+                                     update="frmMain frmDlgAddImage"
+                                     style="font-size: 0.8rem; height: 36px; margin-right: 10px;"/>
+                </div>
+            </h:form>
+        </p:dialog>
+
     </ui:define>
 </ui:composition>

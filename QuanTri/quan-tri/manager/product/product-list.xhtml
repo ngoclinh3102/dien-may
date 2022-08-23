@@ -3,8 +3,7 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="/templates/main/template.xhtml"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                template="/templates/main/template.xhtml">
 
     <ui:define name="title">DS Sản phẩm</ui:define>
     <ui:define name="content">
@@ -16,7 +15,7 @@
                          value="#{ProductListBean.products}" var="product"
                          emptyMessage="Không tìm thấy dữ liệu sản phẩm."
                          paginator="true" paginatorPosition="bottom" rows="15">
-                <p:column headerText="ID" width="5%">
+                <p:column headerText="ID" width="10%">
                     <a href="product-detail.xhtml?id=#{product.code}">
                         <h:outputText value="#{product.code}"/>
                     </a>
@@ -24,11 +23,11 @@
                 <p:column headerText="Tên sản phẩm" width="30%">
                     <h:outputText value="#{product.name}"/>
                 </p:column>
-                <p:column headerText="Tồn kho" width="10%">
+                <p:column headerText="Tồn kho" width="7.5%">
                     <h:outputText value="#{product.inventory}"/>
                 </p:column>
                 <p:column headerText="Đơn giá">
-                    <h:outputText value="#{product.price}" width="15%"/>
+                    <h:outputText value="#{product.price}" width="20%"/>
                 </p:column>
                 <p:column headerText="Trạng thái">
                     <h:outputText value="#{product.status ? 'Sẵn sàng' : 'Tạm khóa'}" width="15%"/>

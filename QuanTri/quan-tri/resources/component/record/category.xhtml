@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:composite="http://java.sun.com/jsf/composite">
+
+<composite:interface>
+    <composite:attribute name="name"/>
+    <composite:attribute name="value"/>
+    <composite:attribute name="editable" default="false"/>
+    <composite:attribute name="style" default=""/>
+</composite:interface>
+<composite:implementation>
+    <tr>
+        <td class="info-label ui-lg-3" style="padding-bottom: 10px !important;">
+            <h:outputText value="#{cc.attrs.name}"/>
+        </td>
+        <td class="info-sep ui-lg-1">:</td>
+        <td class="info-content ui-lg-8">
+            <h:outputText value="#{cc.attrs.value}" rendered="#{!cc.attrs.editable}" style="#{cc.attrs.style}" converter="ProductCategoryConverter"/>
+            <p:selectOneMenu id="selectOneCateGory"
+                             value="#{cc.attrs.value}"
+                             hideNoSelectionOption="#{not empty cc.attrs.value}"
+                             rendered="#{cc.attrs.editable}" style="width: 100%;">
+                <p:ajax update="@this" process="@this"/>
+                <f:selectItem itemLabel="Chọn loại mặt hàng" itemValue="#{null}" noSelectionOption="true"/>
+                <f:selectItems value="#{ProductCategoryConverter.categoryMap.entrySet()}" var="category"
+                               itemLabel="#{category.value}" itemValue="#{category.key}"/>
+            </p:selectOneMenu>
+        </td>
+    </tr>
+</composite:implementation>
+
+</html>

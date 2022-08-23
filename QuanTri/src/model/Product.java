@@ -2,7 +2,7 @@ package model;
 
 /*
     Author      : Ngoc Linh, Vu
-    Last modify : 2022/08/15
+    Last modify : 2022/08/19
 */
 
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ public class Product {
     private int bought;
     private String  discountCode;
     private boolean status;
+    private int warranty;
 
     public Product() {
     }
@@ -131,5 +132,31 @@ public class Product {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public int getWarranty() {
+        return warranty;
+    }
+
+    public void setWarranty(int warranty) {
+        this.warranty = warranty;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "code='" + code + "', " +
+                "name='" + name + "', " +
+                "images=" + images +  "', " +
+                "desc='" + "desc" + "', " +
+                "brand='" + brand + "', " +
+                "categoryCode='" + categoryCode + "', " +
+                "unit='" + unit + "', " +
+                "inventory=" + inventory +  ", " +
+                "price=" + price +  ", " +
+                "price0=" + price0 +  ", " +
+                "bought=" + bought +  ", " +
+                "discountCode='" + discountCode + "', " +
+                "status=" + status + " }";
     }
 }

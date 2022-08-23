@@ -15,11 +15,11 @@ public class CustomerService extends BaseService {
 
     /* GET CUSTOMERS */
     public static ArrayList<Customer> getCustomers() {
-        if (getStament() != null) {
+        if (getStatement() != null) {
             ArrayList<Customer> list = new ArrayList<>();
             String query = "SELECT * FROM CUSTOMER";
             try {
-                ResultSet resultSet = getStament().executeQuery(query);
+                ResultSet resultSet = getStatement().executeQuery(query);
                 while (resultSet.next()) {
                     Customer customer = new Customer();
                     customer.setId(resultSet.getInt(1));
@@ -49,10 +49,10 @@ public class CustomerService extends BaseService {
     /* GET CUSTOMER */
     public static Customer getCustomer(String id) {
         Customer customer = new Customer();
-        if (getStament() != null) {
+        if (getStatement() != null) {
             String query = "SELECT * FROM CUSTOMER WHERE ID=" + id;
             try {
-                ResultSet resultSet = getStament().executeQuery(query);
+                ResultSet resultSet = getStatement().executeQuery(query);
                 if (resultSet.next()) {
                     customer.setId(resultSet.getInt(1));
                     customer.setFirstName(resultSet.getString(2));
@@ -78,7 +78,7 @@ public class CustomerService extends BaseService {
 
     /* PUT CUSTOMER */
     public static long putCustomer(Customer customer) {
-        if (getStament() != null) {
+        if (getStatement() != null) {
             String sql =
                     "UPDATE CUSTOMER " +
                             "SET first_name = '" + customer.getFirstName() + "', " +
@@ -91,7 +91,7 @@ public class CustomerService extends BaseService {
                             "status = " + (customer.isStatus() ? 1 : 0) + " " +
                             "WHERE id=" + customer.getId();
             try {
-                long count = getStament().executeUpdate(sql);
+                long count = getStatement().executeUpdate(sql);
                 System.out.println("count: " + count);
                 return 1;
             }

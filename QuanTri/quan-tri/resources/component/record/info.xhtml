@@ -3,20 +3,24 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:composite="http://java.sun.com/jsf/composite">
 
 <composite:interface>
     <composite:attribute name="name"/>
     <composite:attribute name="value"/>
+    <composite:attribute name="editable" default="false"/>
+    <composite:attribute name="style" default=""/>
 </composite:interface>
 <composite:implementation>
     <tr>
-        <td class="info-label ui-lg-3">
+        <td class="info-label ui-lg-3" style="padding-bottom: 10px !important;">
             <h:outputText value="#{cc.attrs.name}"/>
         </td>
         <td class="info-sep ui-lg-1">:</td>
         <td class="info-content ui-lg-8">
-            <h:outputText value="#{cc.attrs.value}" />
+            <h:outputText value="#{cc.attrs.value}" rendered="#{!cc.attrs.editable}" style="#{cc.attrs.style}"/>
+            <p:inputText value="#{cc.attrs.value}" rendered="#{cc.attrs.editable}" style="width: 100%;"/>
         </td>
     </tr>
 </composite:implementation>

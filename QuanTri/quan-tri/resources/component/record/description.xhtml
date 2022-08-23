@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:composite="http://java.sun.com/jsf/composite">
+
+<composite:interface>
+    <composite:attribute name="name"/>
+    <composite:attribute name="value"/>
+    <composite:attribute name="editable" default="false"/>
+</composite:interface>
+<composite:implementation>
+    <tr>
+        <td class="info-label ui-lg-3" style="padding-bottom: 10px !important;">
+            <h:outputText value="#{cc.attrs.name}"/>
+        </td>
+        <td class="info-sep ui-lg-1">:</td>
+        <td class="info-content ui-lg-8">
+            <p:outputPanel value="#{cc.attrs.value}" rendered="#{!cc.attrs.editable}" style="width: 100%;"/>
+            <p:inputTextarea value="#{cc.attrs.value}" rendered="#{cc.attrs.editable}" style="width: 100%;"/>
+        </td>
+    </tr>
+</composite:implementation>
+
+</html>
