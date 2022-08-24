@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="title">Điện máy</ui:define>
+    <ui:define name="content">
+        <h:form id="frmMain">
+            <!--DANH SÁCH SẢN PHẨM-->
+            <div class="card">
+                <p:dataGrid id="dgProduct"
+                            value="#{HomeBean.products}" var="product"
+                            columns="4" layout="grid"
+                            paginator="true" rows="6"
+                            paginatorPosition="bottom"
+                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="6,12,16">
+                    <f:facet name="header">
+                        <h:outputLabel value="DANH SÁCH SẢN PHẨM"/>
+                    </f:facet>
+                    <div class="card product-grid-item" style="height: 360px;">
+                        <div class="ui-g-12 p-4">
+                            <p:graphicImage name="#{product.images.size()>0 ? product.images.get(0) : 'null.png'}" library="image"
+                                            alt="hông tìm thấy ảnh pé ơi"
+                                            styleClass="ui-g-12"/>
+                        </div>
+                        <div style="text-align: center; font-weight: bold; font-size: .9rem;">
+                            <a href="../index.xhtml" style="text-decoration: none;">
+                                #{product.name}
+                            </a>
+                        </div>
+                        <div style="text-align: center;">
+                            <h:outputText value="#{product.price}đ  " style="font-weight: bold;"/>
+                            <h:outputText value="#{product.price0}"
+                                          rendered="#{product.price0 > product.price}"
+                                          style="text-decoration: line-through;"/>
+                        </div>
+                        <div>
+                            <p:commandButton value="Thêm vào giỏ hàng" icon="fa fa-cart-plus"
+                                             style="float: right; font-size: 0.66rem !important;"/>
+                        </div>
+                    </div>
+                </p:dataGrid>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

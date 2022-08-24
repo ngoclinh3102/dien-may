@@ -18,9 +18,10 @@
             <div class="card ui-g">
                 <!--LEFT: IMAGE-->
                 <div class="ui-lg-4">
-                    <p:dataList value="#{ProductDetailBean.product.images}" var="image"
+                    <p:dataList id="dlProduct"
+                                value="#{ProductDetailBean.product.images}" var="image"
                                 type="definition"
-                                rows="1" paginator="true" paginatorPosition="bottom"
+                                paginator="true" rows="1" paginatorPosition="bottom"
                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {NextPageLink} {LastPageLink}"
                                 currentPageReportTemplate="({startRecord} / {totalRecords})"
                                 style="width: 100%;">
@@ -28,7 +29,8 @@
                             Ảnh sản phẩm
                         </f:facet>
                         <f:facet name="description">
-                            <img src="../../resources/image/#{image}" alt="" width="100%" onclick="PF('dlgAddImage').show();"/>
+<!--                            <p:graphicImage name="#{image}" library="image" alt="hông tìm thấy ảnh pé ơi" width="100%"/>-->
+                            <img src="../../resources/image/#{image}" alt="hông tìm thấy ảnh pé ơi" width="100%"/>
                             <p:divider/>
                             <p:commandButton action="#{ProductDetailBean.actionDeleteImage(image)}"
                                              update="frmMain"
@@ -53,6 +55,7 @@
                             <recordCompo:info name="Tên sản phẩm" value="#{ProductDetailBean.product.name}" editable="true"/>
                             <recordCompo:info name="Thương hiệu" value="#{ProductDetailBean.product.brand}" editable="true"/>
                             <recordCompo:category name="Loại mặt hàng" value="#{ProductDetailBean.product.categoryCode}" editable="true"/>
+                            <recordCompo:info name="Ngày tạo" value="#{ProductDetailBean.product.createdAt}"/>
                             <recordCompo:info name="Đơn vị tính" value="#{ProductDetailBean.product.unit}"/>
                             <recordCompo:info name="Số lượng tồn kho" value="#{ProductDetailBean.product.inventory}" style="font-weight: bold;"/>
                             <recordCompo:info name="Giá nhập" value="#{ProductDetailBean.product.price0} vnđ"/>
@@ -88,7 +91,7 @@
                     <p:commandButton value="Hủy" onclick="PF('dlgAddImage').hide();"/>
                     <p:commandButton value="Thêm"
                                      action="#{ProductDetailBean.actionPostImage()}"
-                                     update="frmMain"/>
+                                     update="frmMain frmDlgAddImage"/>
                 </div>
             </h:form>
         </p:dialog>

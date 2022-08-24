@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<body>
+<ui:composition>
+    <div style="width: 100%; height: 44px; text-align: center; background: rgb(1, 91, 171); padding: 0; margin: 0;">
+        <p:graphicImage name="qc1.png" library="image"/>
+    </div>
+    <div class="div-header ui-g">
+        <div class="ui-lg-4">
+            <p:graphicImage name="logo.png" library="image"/>
+        </div>
+        <div class="ui-lg-8">
+            <h:form>
+                <div class="table-input-wrap">
+                    <p:inputText styleClass="table-input" placeholder="Bạn tìm gì..."/>
+                    <p:commandButton icon="fa fa-search" styleClass="search-btn"/>
+                </div>
+            </h:form>
+        </div>
+    </div>
+</ui:composition>
+</body>
+</html>

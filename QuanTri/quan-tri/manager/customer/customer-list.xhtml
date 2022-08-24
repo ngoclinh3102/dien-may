@@ -11,8 +11,9 @@
         <form id="frmMain">
             <div class="card-header">
                 <p:outputLabel value="DANH SÁCH KHÁCH HÀNG"/>
-                <p:linkButton href="customer-create.xhtml"
-                              icon="pi pi-plus" style="float: right;"/>
+                <p:linkButton value="Thêm mới" href="customer-create.xhtml"
+                              icon="pi pi-plus"
+                              styleClass="create-btn"/>
             </div>
             <p:dataTable id="tblCustomerList" widgetVar="tblCustomerList"
                          value="#{CustomerListBean.customers}" var="customer"

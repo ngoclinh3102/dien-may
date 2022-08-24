@@ -46,6 +46,9 @@ body {
 }
 
 .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     border-radius: 3px;
     background: #1c80cf;
@@ -112,11 +115,9 @@ body {
 }
 
 .create-btn {
+    background: #4caf50 !important;
+    font-size: 18px !important;
     padding: 0;
-    background-color: #4CAF50 !important;
-    float: right;
-    font-size: 20px !important;
-    height: 23px !important;
 }
 
 .return-btn {

@@ -21,6 +21,7 @@ public class BaseService implements Serializable {
                 statement =  CONNECTION.createStatement();
             }
             catch (SQLException e) {
+                System.out.println(" === CANNOT CONNECT TO DATABASE ====");
                 e.printStackTrace();
             }
         }

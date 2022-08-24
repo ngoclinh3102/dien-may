@@ -2,14 +2,13 @@ package bean;
 
 /*
     Author      : Ngoc Linh, Vu
-    Last modify : 2022/08/15
+    Last modify : 2022/08/24
 */
 
 import org.primefaces.PrimeFaces;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import java.io.IOException;
 import java.io.Serializable;
 
 public class BaseBean implements Serializable {
@@ -64,4 +63,10 @@ public class BaseBean implements Serializable {
             e.printStackTrace();
         }
     }
+
+    public void getCurrentPage() {
+        String currentPage = FacesContext.getCurrentInstance().getExternalContext().getRequestServletPath();
+        System.out.println("currentPage: " + currentPage);
+    }
 }
+

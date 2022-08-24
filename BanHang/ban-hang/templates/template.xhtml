@@ -1,0 +1,36 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>
+        <ui:insert name="title">default title</ui:insert>
+    </title>
+    <ui:insert name="stylesheet">
+        <link rel="stylesheet" href="../resources/css/style.css"/>
+        <link rel="stylesheet" href="../resources/css/font-awesome-4.7.0/css/font-awesome.min.css"/>
+    </ui:insert>
+    <p:growl id="growlMessage" showDetail="true">
+        <p:autoUpdate/>
+    </p:growl>
+</h:head>
+<h:body >
+    <ui:insert name="header">
+        <ui:include src="header.xhtml"/>
+    </ui:insert>
+
+    <div class="ui-lg-12 no-padding">
+        <p:graphicImage name="banner.PNG" library="image" width="100%" alt="hông thấy ảnh pé ơii"/>
+    </div>
+
+    <ui:insert name="content"/>
+
+    <ui:insert name="footer">
+        <ui:include src="footer.xhtml"/>
+    </ui:insert>
+</h:body>
+</html>

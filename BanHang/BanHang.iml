@@ -24,5 +24,6 @@
     <orderEntry type="library" name="primeflex" level="application" />
     <orderEntry type="library" name="mysql-connector-java-8.0.28" level="project" />
     <orderEntry type="library" name="javaee-api-7.0" level="project" />
+    <orderEntry type="module" module-name="QuanTri" />
   </component>
 </module>

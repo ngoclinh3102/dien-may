@@ -18,7 +18,7 @@ public class ProductService extends BaseService {
     public static List<Product> getProducts() {
         if (getStatement() != null) {
             List<Product> list = new ArrayList<>();
-            String sql = "SELECT * FROM product";
+            String sql = "SELECT * FROM product ORDER BY `created_at`";
             try {
                 ResultSet resultSet = getStatement().executeQuery(sql);
                 while (resultSet.next()) {
@@ -36,6 +36,69 @@ public class ProductService extends BaseService {
                     product.setDiscountCode(resultSet.getString(11));
                     product.setStatus(resultSet.getInt(12)==1);
                     product.setWarranty(resultSet.getInt(13));
+                    product.setCreatedAt(resultSet.getString(14));
+
+                    list.add(product);
+                }
+
+                System.out.println("ProductService.getProducts(): SUCCESS");
+                System.out.println("==================================================");
+            }
+            catch (SQLException e) {
+                System.out.println("ProductService.getProducts(): FAILED");
+                System.out.println("==================================================");
+                e.printStackTrace();
+            }
+
+            for (Product product : list) {
+                String sql2 = "SELECT image FROM product_img WHERE product_code='" + product.getCode() +"'";
+                try {
+                    ResultSet resultSet2 = getStatement().executeQuery(sql2);
+                    List<String> images = new ArrayList<>();
+                    while (resultSet2.next()) {
+                        images.add(resultSet2.getString(1));
+                    }
+                    product.setImages(images);
+                }
+                catch (SQLException e) {
+                    System.out.println("ProductService.getProducts().getImages("+product.getCode()+"): FAILED");
+                    System.out.println("==================================================");
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("ProductService.getProducts().getImages(): SUCCESS");
+            System.out.println("==================================================");
+            return list;
+        }
+        else {
+            System.out.println("ProductService.getProducts(): CANNOT CONNECT TO DATABASE!!");
+            System.out.println("==================================================");
+        }
+        return new ArrayList<>();
+    }
+
+    public static List<Product> getProducts(int getProductForSell) {
+        if (getStatement() != null) {
+            List<Product> list = new ArrayList<>();
+            String sql = "SELECT * FROM product WHERE `status`=1 ORDER BY `created_at`";
+            try {
+                ResultSet resultSet = getStatement().executeQuery(sql);
+                while (resultSet.next()) {
+                    Product product = new Product();
+                    product.setCode(resultSet.getString(1));
+                    product.setName(resultSet.getString(2));
+                    product.setDesc(resultSet.getString(3));
+                    product.setBrand(resultSet.getString(4));
+                    product.setCategoryCode(resultSet.getString(5));
+                    product.setUnit(resultSet.getString(6));
+                    product.setInventory(resultSet.getInt(7));
+                    product.setPrice(resultSet.getFloat(8));
+                    product.setPrice0(resultSet.getFloat(9));
+                    product.setBought(resultSet.getInt(10));
+                    product.setDiscountCode(resultSet.getString(11));
+                    product.setStatus(resultSet.getInt(12)==1);
+                    product.setWarranty(resultSet.getInt(13));
+                    product.setCreatedAt(resultSet.getString(14));
 
                     list.add(product);
                 }
@@ -79,7 +142,7 @@ public class ProductService extends BaseService {
     /* GET PRODUCT BY ID */
     public static Product getProduct(String code) {
         if (getStatement()!=null) {
-            String sql = "SELECT * FROM product WHERE code='" + code + "'";
+            String sql = "SELECT * FROM product WHERE `code`='" + code + "'";
             try {
                 ResultSet resultSet = getStatement().executeQuery(sql);
                 if (resultSet.next()) {
@@ -97,12 +160,13 @@ public class ProductService extends BaseService {
                     product.setDiscountCode(resultSet.getString(11));
                     product.setStatus(resultSet.getInt(12)==1);
                     product.setWarranty(resultSet.getInt(13));
+                    product.setCreatedAt(resultSet.getString(14));
 
                     System.out.println("ProductService.getProduct(" + code + "): SUCCESS");
                     System.out.println("==================================================");
 
                     //get images
-                    String sql2 = "SELECT image FROM product_img WHERE product_code='" + product.getCode() +"'";
+                    String sql2 = "SELECT `image` FROM product_img WHERE `product_code`='" + product.getCode() +"'";
                     try {
                         ResultSet resultSet2 = getStatement().executeQuery(sql2);
                         List<String> images = new ArrayList<>();
@@ -126,7 +190,7 @@ public class ProductService extends BaseService {
                 e.printStackTrace();
             }
         }
-        return null;
+        return new Product();
     }
 
     /* PUT PRODUCT */
@@ -146,7 +210,6 @@ public class ProductService extends BaseService {
                                 "`status`=" + product.isStatus() + ", " +
                                 "`warranty`=" + product.getWarranty() + " " +
                             "WHERE `code`='" + product.getCode() + "' ";
-            System.out.println("sql: " + sql);
             try {
                 int rs = getStatement().executeUpdate(sql);
                 if (rs == 1) {
@@ -237,7 +300,8 @@ public class ProductService extends BaseService {
                                             "`price_0`," +
                                             "`bought`," +
                                             "`status`," +
-                                            "`warranty`) " +
+                                            "`warranty`, " +
+                                            "`created_at`) " +
                             "VALUES ('" + product.getCode() + "'," +
                                     "'" + product.getName() + "'," +
                                     "'" + product.getDesc() + "'," +
@@ -249,7 +313,8 @@ public class ProductService extends BaseService {
                                     "" + product.getPrice0() + "," +
                                     "" + product.getBought() + "," +
                                     "" + (product.isStatus()?"1":"0") + "," +
-                                    "" + product.getWarranty() + "" +
+                                    "" + product.getWarranty() + "," +
+                                    "CURRENT_TIMESTAMP()" +
                                     ")";
             try {
                 int rs =  getStatement().executeUpdate(sql);

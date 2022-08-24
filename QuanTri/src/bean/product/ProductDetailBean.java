@@ -26,7 +26,7 @@ public class ProductDetailBean extends BaseBean {
     public Product getProduct() {
         if (product == null) {
             product = ProductService.getProduct(id);
-            System.out.println(product==null?"null":product.toString());
+            System.out.println(product.toString());
         }
         return product;
     }
@@ -88,7 +88,7 @@ public class ProductDetailBean extends BaseBean {
             closeDialog("dlgAddImage");
             if (i == 0) {
                 showInfo("Đã cập nhật ảnh sản phẩm " + product.getCode() + "!!");
-                resetInput();
+                resetInputImage();
             }
             else if (i == -1) {
                 showError("Lỗi kết nối đến CSDL!!");
@@ -110,7 +110,7 @@ public class ProductDetailBean extends BaseBean {
 
         if (i == 0) {
             showInfo("Đã xóa ảnh của sản phẩm " + product.getCode() + "!!");
-            resetInput();
+            resetInputImage();
         }
         else if (i == -1) {
             showError("Lỗi kết nối đến CSDL!!");
@@ -123,7 +123,7 @@ public class ProductDetailBean extends BaseBean {
         }
     }
 
-    private void resetInput() {
+    private void resetInputImage() {
         product = null;
         image = null;
         imagePath = null;

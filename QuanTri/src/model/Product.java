@@ -23,6 +23,7 @@ public class Product {
     private String  discountCode;
     private boolean status;
     private int warranty;
+    private String createdAt;
 
     public Product() {
     }
@@ -142,21 +143,32 @@ public class Product {
         this.warranty = warranty;
     }
 
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
-                "code='" + code + "', " +
-                "name='" + name + "', " +
-                "images=" + images +  "', " +
-                "desc='" + "desc" + "', " +
-                "brand='" + brand + "', " +
-                "categoryCode='" + categoryCode + "', " +
-                "unit='" + unit + "', " +
-                "inventory=" + inventory +  ", " +
-                "price=" + price +  ", " +
-                "price0=" + price0 +  ", " +
-                "bought=" + bought +  ", " +
-                "discountCode='" + discountCode + "', " +
-                "status=" + status + " }";
+                "code='" + code + '\'' +
+                ", name='" + name + '\'' +
+                ", images=" + images +
+                ", desc='" + "desc" + '\'' +
+                ", brand='" + brand + '\'' +
+                ", categoryCode='" + categoryCode + '\'' +
+                ", unit='" + unit + '\'' +
+                ", inventory=" + inventory +
+                ", price=" + price +
+                ", price0=" + price0 +
+                ", bought=" + bought +
+                ", discountCode='" + discountCode + '\'' +
+                ", status=" + status +
+                ", warranty=" + warranty +
+                ", createdAt='" + createdAt + '\'' +
+                '}';
     }
 }

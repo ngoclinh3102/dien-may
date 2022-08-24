@@ -10,6 +10,9 @@
         <h:form id="frmMain">
             <div class="card-header">
                 <h:outputText value="DANH SÁCH SẢN PHẨM"/>
+                <p:linkButton value="Thêm mới" href="product-create.xhtml"
+                              icon="pi pi-plus"
+                              styleClass="create-btn"/>
             </div>
             <p:dataTable id="tblProductList" widgetVar="tblProductList"
                          value="#{ProductListBean.products}" var="product"
