@@ -12,7 +12,19 @@
     <ui:define name="content">
         <h:form id="frmMain">
             <!--DANH SÁCH SẢN PHẨM-->
+
             <div class="card">
+                <div class="ui-g" style="width: 100%; height: 50px; padding: 0; font-size: 1.2rem; alignment: center;">
+                    <div class="ui-lg-4">
+                        <h:outputLabel value="Sản phẩm mới"/>
+                    </div>
+                    <div class="ui-lg-8">
+                        <p:commandButton icon="fa fa-refresh"
+                                         action="#{HomeBean.actionResetFilter()}"
+                                         update="frmMain"
+                                         style="height: 30px; float: right;"/>
+                    </div>
+                </div>
                 <p:dataGrid id="dgProduct"
                             value="#{HomeBean.products}" var="product"
                             columns="4" layout="grid"
@@ -20,12 +32,10 @@
                             paginatorPosition="bottom"
                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                             rowsPerPageTemplate="6,12,16">
-                    <f:facet name="header">
-                        <h:outputLabel value="DANH SÁCH SẢN PHẨM"/>
-                    </f:facet>
                     <div class="card product-grid-item" style="height: 360px;">
                         <div class="ui-g-12 p-4">
-                            <p:graphicImage name="#{product.images.size()>0 ? product.images.get(0) : 'null.png'}" library="image"
+                            <p:graphicImage name="#{product.images.size()>0 ? product.images.get(0) : 'null.png'}"
+                                            library="image"
                                             alt="hông tìm thấy ảnh pé ơi"
                                             styleClass="ui-g-12"/>
                         </div>
@@ -35,14 +45,25 @@
                             </a>
                         </div>
                         <div style="text-align: center;">
-                            <h:outputText value="#{product.price}đ  " style="font-weight: bold;"/>
+                            <h:outputText value="#{product.price}" style="font-weight: bold; color: red;">
+                                <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
+                            </h:outputText>
                             <h:outputText value="#{product.price0}"
                                           rendered="#{product.price0 > product.price}"
-                                          style="text-decoration: line-through;"/>
+                                          style="text-decoration: line-through;">
+                                <f:convertNumber pattern="¤#,###" currencySymbol=""/>
+                            </h:outputText>
                         </div>
                         <div>
-                            <p:commandButton value="Thêm vào giỏ hàng" icon="fa fa-cart-plus"
+                            <p:commandButton value="Thêm vào giỏ hàng"
+                                             action="#{CustomerSessionBean.actionAddCart(product.code)}"
+                                             icon="fa fa-cart-plus"
+                                             rendered="#{product.inventory>0}"
                                              style="float: right; font-size: 0.66rem !important;"/>
+                            <p:commandButton value="Hết hàng"
+                                             icon="fa fa-exclamation"
+                                             rendered="#{product.inventory==0}"
+                                             style="float: right; font-size: 0.66rem !important; background: #4c4c4c;"/>
                         </div>
                     </div>
                 </p:dataGrid>

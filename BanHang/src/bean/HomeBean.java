@@ -41,9 +41,25 @@ public class HomeBean extends BaseBean {
     }
 
     /* METHOD */
-    private void actionResetFilter() {
-        products = null;
+    public void actionResetFilter() {
+        products = productsAll;
         filter = null;
-        redirect("../ban-hang/index.xhtml");
+    }
+
+
+    /* REDIRECT */
+    public void actionToHomePage() {
+        redirect("../ban-hang/e-commerce/home.xhtml");
+    }
+    public void actionToLoginPage() {
+        redirect("../ban-hang/login.xhtml");
+    }
+
+    public void actionToSingUpPage() {
+        redirect("../ban-hang/sign-up.xhtml");
+    }
+
+    public void actionToCartPage() {
+        redirect("../ban-hang/e-commerce/cart.xhtml");
     }
 }

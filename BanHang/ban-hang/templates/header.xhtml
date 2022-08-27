@@ -8,22 +8,66 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <body>
 <ui:composition>
-    <div style="width: 100%; height: 44px; text-align: center; background: rgb(1, 91, 171); padding: 0; margin: 0;">
-        <p:graphicImage name="qc1.png" library="image"/>
-    </div>
-    <div class="div-header ui-g">
-        <div class="ui-lg-4">
-            <p:graphicImage name="logo.png" library="image"/>
+    <h:form id="frmMenu">
+        <div style="width: 100%; height: 44px; text-align: center; background: rgb(1, 91, 171); padding: 0; margin: 0;">
+            <p:graphicImage name="qc1.png" library="image"/>
         </div>
-        <div class="ui-lg-8">
-            <h:form>
-                <div class="table-input-wrap">
-                    <p:inputText styleClass="table-input" placeholder="Bạn tìm gì..."/>
-                    <p:commandButton icon="fa fa-search" styleClass="search-btn"/>
+        <div class="div-header ui-g">
+            <div class="ui-lg-2">
+                <p:commandLink action="#{HomeBean.actionToHomePage()}">
+                    <p:graphicImage name="logo.png" library="image"/>
+                </p:commandLink>
+            </div>
+
+            <div class="ui-lg-10 ui-g no-padding" style="align-items: end;">
+                <div class="ui-lg-8 no-padding">
+                    <div class="table-input-wrap" style="left: 64%;">
+                        <p:inputText styleClass="table-input" placeholder="Tìm kiếm..."/>
+                        <p:commandButton icon="fa fa-search" styleClass="search-btn"/>
+                    </div>
                 </div>
-            </h:form>
+                <div class="ui-lg-4 no-padding" style="text-align: right; padding-right: 10px;">
+                    <p:tooltip for="order-btn" value="Đơn hàng" position="top" style="font-size: 0.6rem;"/>
+                    <p:commandButton id="order-btn"
+                                     rendered="#{CustomerSessionBean.customer ne null}"
+                                     icon="fa fa-file-text" styleClass="order-btn"/>
+
+                    <p:tooltip for="cart-btn" value="Giỏ hàng" position="top" style="font-size: 0.6rem;"/>
+                    <p:commandButton id="cart-btn"
+                                     action="#{HomeBean.actionToCartPage()}"
+                                     rendered="#{CustomerSessionBean.customer ne null}"
+                                     icon="fa fa-shopping-cart" styleClass="cart-btn"/>
+
+                    <p:tooltip for="profile-btn" value="#{CustomerSessionBean.customer.lastName} #{CustomerSessionBean.customer.firstName}" position="top" style="font-size: 0.6rem;"/>
+                    <p:commandButton id="profile-btn"
+                                     icon="fa fa-user-o"
+                                     rendered="#{CustomerSessionBean.customer ne null}"
+                                     styleClass="profile-btn"/>
+
+                    <p:tooltip for="logout-btn" value="Đăng xuất" position="top" style="font-size: 0.6rem;"/>
+                    <p:commandButton id="logout-btn"
+                                     action="#{CustomerSessionBean.actionLogout()}" update="frmMenu frmMain"
+                                     icon="fa fa-sign-out"
+                                     rendered="#{CustomerSessionBean.customer ne null}"
+                                     styleClass="logout-btn"/>
+
+                    <p:tooltip for="login-btn" value="Đăng nhập" position="top" style="font-size: 0.6rem;"/>
+                    <p:commandButton id="login-btn"
+                                     action="#{HomeBean.actionToLoginPage()}"
+                                     icon="fa fa-sign-in"
+                                     rendered="#{CustomerSessionBean.customer eq null}"
+                                     styleClass="profile-btn"/>
+
+                    <p:tooltip for="signup-btn" value="Đăng ký" position="top" style="font-size: 0.6rem;"/>
+                    <p:commandButton id="signup-btn"
+                                     action="#{HomeBean.actionToSingUpPage()}"
+                                     icon="fa fa-pencil-square-o"
+                                     rendered="#{CustomerSessionBean.customer eq null}"
+                                     styleClass="logout-btn"/>
+                </div>
+            </div>
         </div>
-    </div>
+    </h:form>
 </ui:composition>
 </body>
 </html>

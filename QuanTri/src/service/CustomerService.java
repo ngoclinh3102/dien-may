@@ -47,7 +47,7 @@ public class CustomerService extends BaseService {
     }
 
     /* GET CUSTOMER */
-    public static Customer getCustomer(String id) {
+    public static Customer getCustomer(int id) {
         Customer customer = new Customer();
         if (getStatement() != null) {
             String query = "SELECT * FROM CUSTOMER WHERE ID=" + id;

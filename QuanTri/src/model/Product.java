@@ -17,8 +17,8 @@ public class Product {
     private String categoryCode;
     private String unit;
     private int inventory;
-    private float price;
-    private float price0;
+    private int price;
+    private int price0;
     private int bought;
     private String  discountCode;
     private boolean status;
@@ -95,19 +95,19 @@ public class Product {
         this.inventory = inventory;
     }
 
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public float getPrice0() {
+    public int getPrice0() {
         return price0;
     }
 
-    public void setPrice0(float price0) {
+    public void setPrice0(int price0) {
         this.price0 = price0;
     }
 

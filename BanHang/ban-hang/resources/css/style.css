@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: lightgray;
+    background: #ecf0f1;
 }
 
 .div-header {
@@ -90,6 +90,32 @@ body {
 }
 
 /*  BUTTON */
+.order-btn,
+.cart-btn,
+.profile-btn,
+.logout-btn {
+    width: 90px !important;
+    height: 40px !important;
+    margin-right: 5px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 2px white solid !important;
+}
+
+.order-btn:hover,
+.cart-btn:hover,
+.profile-btn:hover,
+.logout-btn:hover {
+    background: #1e3799 !important;
+}
+
+.order-btn:focus,
+.cart-btn:focus,
+.profile-btn:focus,
+.logout-btn:focus {
+    box-shadow: none !important;
+}
+
 .submit-btn {
     height: 50px !important;
     width: 150px;
@@ -131,7 +157,7 @@ body {
 }
 
 .search-btn {
-    height: 30px;
+    height: 40px !important;
     border: none !important;
     background: transparent !important;
     color: rebeccapurple !important;
@@ -139,7 +165,8 @@ body {
 }
 
 .search-btn:hover {
-    background: wheat !important;
+    background: #3498db !important;
+    color: white !important;
 }
 
 .confirm-popup-no {
@@ -180,6 +207,34 @@ body {
     background: #fff !important;
     color: #111 !important;
     padding: 6px 12px !important;
-    height: 30px;
+    height: 40px;
     font-size: .66rem !important;
+}
+
+.table-input:focus {
+    box-shadow: none !important;
+}
+
+/* login test */
+.username,
+.password {
+    width: 100%;
+}
+
+.username:hover,
+.password:hover {
+
+}
+
+.username:focus,
+.password:focus {
+
+}
+
+.login {
+    float: right;
+}
+
+.checkbox:focus {
+    box-shadow: none !important;
 }

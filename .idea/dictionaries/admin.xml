@@ -2,14 +2,17 @@
   <dictionary name="admin">
     <words>
       <w>chưa</w>
+      <w>chắc</w>
       <w>chọn</w>
       <w>csdl</w>
       <w>công</w>
       <w>dien</w>
       <w>giặt</w>
       <w>hiệu</w>
+      <w>hoặc</w>
       <w>hàng</w>
       <w>không</w>
+      <w>khẩu</w>
       <w>linh</w>
       <w>loại</w>
       <w>lòng</w>
@@ -23,6 +26,7 @@
       <w>phẩm</w>
       <w>quan</w>
       <w>quản</w>
+      <w>thao</w>
       <w>thoại</w>
       <w>thành</w>
       <w>thêm</w>
@@ -30,11 +34,18 @@
       <w>thất</w>
       <w>thực</w>
       <w>tiết</w>
+      <w>trong</w>
       <w>truy</w>
+      <w>trình</w>
+      <w>trước</w>
+      <w>trường</w>
+      <w>trống</w>
       <w>tính</w>
       <w>xong</w>
       <w>điều</w>
       <w>điện</w>
+      <w>đăng</w>
+      <w>được</w>
     </words>
   </dictionary>
 </component>

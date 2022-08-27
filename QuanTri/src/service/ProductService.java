@@ -2,11 +2,10 @@ package service;
 
 /*
     Author      : Ngoc Linh, Vu
-    Last modify : 2022/08/19
+    Last modify : 2022/08/24
 */
 
 import model.Product;
-import utils.Message;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,8 +29,8 @@ public class ProductService extends BaseService {
                     product.setCategoryCode(resultSet.getString(5));
                     product.setUnit(resultSet.getString(6));
                     product.setInventory(resultSet.getInt(7));
-                    product.setPrice(resultSet.getFloat(8));
-                    product.setPrice0(resultSet.getFloat(9));
+                    product.setPrice(resultSet.getInt(8));
+                    product.setPrice0(resultSet.getInt(9));
                     product.setBought(resultSet.getInt(10));
                     product.setDiscountCode(resultSet.getString(11));
                     product.setStatus(resultSet.getInt(12)==1);
@@ -78,9 +77,10 @@ public class ProductService extends BaseService {
     }
 
     public static List<Product> getProducts(int getProductForSell) {
+        System.out.println(getProductForSell);
         if (getStatement() != null) {
             List<Product> list = new ArrayList<>();
-            String sql = "SELECT * FROM product WHERE `status`=1 ORDER BY `created_at`";
+            String sql = "SELECT * FROM product WHERE `status`=1 ORDER BY `created_at` DESC";
             try {
                 ResultSet resultSet = getStatement().executeQuery(sql);
                 while (resultSet.next()) {
@@ -92,8 +92,8 @@ public class ProductService extends BaseService {
                     product.setCategoryCode(resultSet.getString(5));
                     product.setUnit(resultSet.getString(6));
                     product.setInventory(resultSet.getInt(7));
-                    product.setPrice(resultSet.getFloat(8));
-                    product.setPrice0(resultSet.getFloat(9));
+                    product.setPrice(resultSet.getInt(8));
+                    product.setPrice0(resultSet.getInt(9));
                     product.setBought(resultSet.getInt(10));
                     product.setDiscountCode(resultSet.getString(11));
                     product.setStatus(resultSet.getInt(12)==1);
@@ -130,6 +130,16 @@ public class ProductService extends BaseService {
             }
             System.out.println("ProductService.getProducts().getImages(): SUCCESS");
             System.out.println("==================================================");
+
+            List<Product> tempList = new ArrayList<>();
+            for (Product p : list) {
+                if (p.getInventory()==0) {
+                    tempList.add(p);
+                }
+            }
+            list.removeIf(product -> product.getInventory()==0);
+            list.addAll(tempList);
+
             return list;
         }
         else {
@@ -154,8 +164,8 @@ public class ProductService extends BaseService {
                     product.setCategoryCode(resultSet.getString(5));
                     product.setUnit(resultSet.getString(6));
                     product.setInventory(resultSet.getInt(7));
-                    product.setPrice(resultSet.getFloat(8));
-                    product.setPrice0(resultSet.getFloat(9));
+                    product.setPrice(resultSet.getInt(8));
+                    product.setPrice0(resultSet.getInt(9));
                     product.setBought(resultSet.getInt(10));
                     product.setDiscountCode(resultSet.getString(11));
                     product.setStatus(resultSet.getInt(12)==1);
@@ -318,12 +328,7 @@ public class ProductService extends BaseService {
                                     ")";
             try {
                 int rs =  getStatement().executeUpdate(sql);
-                if (rs == 1) {
-//                    System.out.println("ProductService.postProduct(): SUCCESS");
-//                    System.out.println("==================================================");
-//                    return 0;
-                }
-                else {
+                if (rs != 1) {
                     return -3;
                 }
             }

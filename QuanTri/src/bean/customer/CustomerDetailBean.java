@@ -17,7 +17,7 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class CustomerDetailBean extends BaseBean {
     /*  DECLARE  */
-    private final String id = getParameter("id");
+    private final int id = Integer.parseInt(getParameter("id"));
     private Customer customer;
 
     /*  GETTER & SETTER  */

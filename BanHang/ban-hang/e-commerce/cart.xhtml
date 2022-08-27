@@ -1,11 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
-</html>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">Giỏ hàng</ui:define>
+
+    <ui:define name="content">
+        <h:form id="frmMain">
+            <div class="card" style="width: 80%; margin: 20px auto;">
+                <h:outputText value="#{CartBean.totalCart}">
+                    <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
+                </h:outputText>
+            </div>
+            <div class="card" style="width: 80%; margin: 20px auto;">
+                <h:outputText value="Giỏ hàng" style="font-weight: bold;"/>
+                <div>
+                    <p:dataTable id="dt-products" widgetVar="dtProducts"
+                                 value="#{CartBean.cartDetails}" var="cd"
+                                 style="width: 100%;">
+
+                        <p:column headerText="" width="3%" style="text-align: center;">
+                            <p:selectBooleanCheckbox value="#{cd.status}" styleClass="checkbox">
+                                <p:ajax listener="#{CartBean.actionSwitchStatus(cd)}" update="frmMain"/>
+                            </p:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column headerText="Ảnh" width="15%">
+                            <p:graphicImage name="#{cd.productThumbnail}" alt="hổng thấy ảnh pé ơi"
+                                            library="image"
+                                            style="width: 100%;"/>
+                        </p:column>
+
+                        <p:column headerText="Sản phẩm" width="30%">
+                            <a href="http://youtube.com" target="_blank"  style="font-weight: 700;">
+                                <h:outputText value="#{cd.productName}"/>
+                            </a>
+                        </p:column>
+
+                        <p:column headerText="Đơn giá" width="20%">
+                            <h:outputText value="#{cd.productPrice}" style="font-weight: 600; color: blue;">
+                                <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
+                            </h:outputText>
+                            <h:outputText value="#{cd.productPrice0}" rendered="#{cd.productPrice ne cd.productPrice0}"
+                                          style="text-decoration: line-through; margin-left: 5px;">
+                                <f:convertNumber pattern="¤#,###" currencySymbol=""/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Số lượng" width="10%">
+                            <p:spinner id="vertical" value="#{cd.quantity}" buttons="vertical" min="1" style="width: 100%;">
+                                <p:ajax listener="#{CartBean.actionAdjustQuantity(cd)}" update="frmMain"/>
+                            </p:spinner>
+                        </p:column>
+
+                        <p:column headerText="" width="7%">
+                            <p:commandButton value="Xóa"
+                                             action="#{CartBean.actionRemoveProduct(cd.productCode)}"
+                                             update="frmMain"
+                                             style="width: 100%; height: 45px; background: red; color: white; border: none; border-radius: 5px;">
+                                <p:confirm type="popup" header="Confirmation" message="Xóa #{cd.productName} khỏi giỏ hàng?" icon="pi pi-exclamation-triangle"/>                            </p:commandButton>
+                        </p:column>
+
+                    </p:dataTable>
+                    <p:confirmPopup global="true">
+                        <p:commandButton value="Hủy" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                        <p:commandButton value="Xóa" type="button" styleClass="ui-confirm-popup-yes"/>
+                    </p:confirmPopup>
+                </div>
+            </div>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
