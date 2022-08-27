@@ -1,10 +1,10 @@
 package utils.mune;
 
 public enum Category {
-    air_con,
-    fridge,
-    laptop,
-    phone,
-    tv,
-    washing_machine
+    AIR_CON,
+    FRIDGE,
+    LAPTOP,
+    PHONE,
+    TV,
+    WASHING_MACHINE
 }

@@ -5,6 +5,10 @@ body {
     background: #ecf0f1;
 }
 
+.padding-1 {
+    padding: 10px !important;
+}
+
 .div-header {
     height: 100px;
     background: #4a90e2;

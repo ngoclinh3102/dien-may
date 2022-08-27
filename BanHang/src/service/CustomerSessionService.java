@@ -6,6 +6,8 @@ package service;
 */
 
 import model.CartDetail;
+import model.Delivery;
+import model.DeliveryDetail;
 import model.Product;
 
 import java.sql.ResultSet;
@@ -152,6 +154,127 @@ public class CustomerSessionService extends BaseService {
             catch (SQLException e) {
                 e.printStackTrace();
                 return -1;
+            }
+        }
+        return 0;
+    }
+
+    /* GET CART_DETAIL FOR CHECKOUT : lấy giỏ hàng để tạo phiếu */
+    public static List<DeliveryDetail> getCartDetailsForCheckout(int customerID) {
+        if (getStatement() != null) {
+            String sql = "SELECT * FROM cart_detail WHERE cart_detail.customer_id=" + customerID + " AND cart_detail.status=1";
+            List<DeliveryDetail> list = new ArrayList<>();
+            try {
+                ResultSet rs = getStatement().executeQuery(sql);
+                while (rs.next()) {
+                    DeliveryDetail dd = new DeliveryDetail();
+                    dd.setDeliveryID(0);
+                    dd.setProductCode(rs.getString(2));
+                    dd.setQuantity(rs.getInt(3));
+
+                    list.add(dd);
+                }
+            }
+            catch (SQLException e) {
+                System.out.println("CustomerService.getCartDetailsForCheckout(): FAILED in 1st step");
+                System.out.println("==================================================");
+                e.printStackTrace();
+                return new ArrayList<>();
+            }
+
+            for (DeliveryDetail dd : list) {
+                Product p = ProductService.getProduct(dd.getProductCode());
+                if (p.getCode().equals(dd.getProductCode())) {
+                    dd.setProductName(p.getName());
+                    dd.setProductThumbnail(p.getImages().get(0));
+                    dd.setProductPrice(p.getPrice());
+                }
+                else {
+                    System.out.println("CustomerService.getCartDetailsForCheckout(): FAILED in 2nd step");
+                    System.out.println("==================================================");
+                    return new ArrayList<>();
+                }
+            }
+
+            System.out.println("CustomerService.getCartDetailsForCheckout(): SUCCESS");
+            System.out.println("==================================================");
+            return list;
+        }
+        return new ArrayList<>();
+    }
+
+    /* CHECK VOUCHER */
+    public static float checkVoucher(String code) {
+        if (getStatement()!=null) {
+            String sql = "CALL SP_CHECKVOUCHER('" + code + "')";
+            try {
+                ResultSet rs = getStatement().executeQuery(sql);
+                if (rs.next()) {
+                    return rs.getFloat(1);
+                }
+                return -2;
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                return -1;
+            }
+        }
+        return 0;
+    }
+
+    /* POST DELIVERY */
+    public static int postDelivery(Delivery delivery) {
+        if (getStatement() != null) {
+            String sql =
+                    "CALL SP_POSTDELIVERY('" +
+                            delivery.getPaymentMethod() + "', '" +
+                            delivery.getShippingAddress() + "', " +
+                            delivery.getCustomerId() + ", '" +
+                            delivery.getNote() + "', '" +
+                            delivery.getShippingAgent().getCode() + "', '" +
+                            delivery.getVoucher().getCode() + "')";
+            try {
+                ResultSet rs = getStatement().executeQuery(sql);
+                if (rs.next()) {
+                    delivery.setId(rs.getInt(1));
+                }
+                else {
+                    return -2;
+                }
+            }
+            catch (SQLException e) {
+                e.printStackTrace();
+                return -1;
+            }
+
+            for (DeliveryDetail deliveryDetail : delivery.getDeliveryDetails()) {
+                String sql2 =
+                        "INSERT INTO delivery_detail " +
+                                "VALUES (" + delivery.getId() + ",'" +
+                                            deliveryDetail.getProductCode() + "'," +
+                                            deliveryDetail.getQuantity() + "," +
+                                            deliveryDetail.getProductPrice() + ")";
+                try {
+                    int rs2 = getStatement().executeUpdate(sql2);
+                    if (rs2 != 1) {
+                        getStatement().executeUpdate("DELETE FROM delivery WHERE id=" + delivery.getId());
+                        getStatement().executeUpdate("DELETE FROM delivery_detail WHERE delivery_id=" + delivery.getId());
+                        return -3;
+                    }
+                }
+                catch (SQLException e) {
+                    e.printStackTrace();
+                    return -1;
+                }
+            }
+            try {
+                String sql3 ="UPDATE voucher SET used = used + 1 WHERE `code`='"+delivery.getVoucher().getCode()+"'";
+                getStatement().executeUpdate(sql3);
+                return delivery.getId();
+            }
+            catch (SQLException e) {
+                System.out.println("Add delivery: cannot update voucher.used!!!");
+                e.printStackTrace();
             }
         }
         return 0;

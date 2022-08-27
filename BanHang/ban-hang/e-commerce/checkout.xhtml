@@ -1,11 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
-</html>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">Chốt đơn</ui:define>
+
+    <ui:define name="content">
+        <h:form id="frmMain">
+            <div class="ui-g" style="padding: 20px; justify-content: space-around;">
+
+                <!--LEFT : LIST PRODUCT-->
+                <div class="card ui-lg-6">
+                    <p:dataTable id="dt-products" widgetVar="dtProducts"
+                                 value="#{CheckoutBean.delivery.deliveryDetails}" var="dd"
+                                 style="width: 100%;">
+
+                        <p:column headerText="Ảnh" width="15%">
+                            <p:graphicImage name="#{dd.productThumbnail}" alt="hổng thấy ảnh pé ơi"
+                                            library="image"
+                                            style="width: 100%;"/>
+                        </p:column>
+
+                        <p:column headerText="Sản phẩm" width="30%">
+                            <a href="http://youtube.com" target="_blank" style="font-weight: 700;">
+                                <h:outputText value="#{dd.productName}"/>
+                            </a>
+                        </p:column>
+
+                        <p:column headerText="Đơn giá" width="20%">
+                            <h:outputText value="#{dd.productPrice}" style="font-weight: 600; color: blue;">
+                                <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Số lượng" width="10%">
+                            <h:outputText value="#{dd.quantity}"/>
+                        </p:column>
+
+                    </p:dataTable>
+                    <div>
+                        <h:outputText value="Tổng cộng: " style=" margin-left: 45%;"/>
+                        <h:outputText value="#{CheckoutBean.totalDelivery}" style="font-weight: 600; color: blue;">
+                            <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
+                        </h:outputText>
+                    </div>
+                </div>
+
+                <!--RIGHT : ORDER INFO-->
+                <div class="card ui-lg-5">
+                    <div style="text-align: center;">
+                        <h3>THÔNG TIN PHIẾU</h3>
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <h:outputText value="Địa chỉ giao hàng: " styleClass="ui-lg-5"/>
+                        <p:inputText value="#{CheckoutBean.delivery.shippingAddress}"
+                                     styleClass="ui-lg-6">
+                            <p:ajax event="blur"/>
+                        </p:inputText>
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <h:outputText value="Hình thức thanh toán:" class="ui-lg-5"/>
+                        <p:selectOneMenu value="#{CheckoutBean.delivery.paymentMethod}" class="ui-lg-6">
+                            <f:selectItem itemLabel="Thanh toán khi nhận hàng" itemValue="Thanh toán khi nhận hàng"/>
+                        </p:selectOneMenu>
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <h:outputText value="Nhập mã giảm giá: " styleClass="ui-lg-5"/>
+                        <p:inputText value="#{CheckoutBean.delivery.voucher.code}">
+                            <p:ajax event="blur"
+                                    listener="#{CheckoutBean.ajaxCheckVoucher()}"
+                                    update="frmMain"/>
+                        </p:inputText>
+                        <p:badge id="badge" value="#{CheckoutBean.badgeMessage}" severity="#{CheckoutBean.badgeStatus}"
+                                 rendered="#{CheckoutBean.badgeVisibility}"/>
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <h:outputText value="Ghi chú đơn hàng: " styleClass="ui-lg-5"/>
+                        <p:inputText value="#{CheckoutBean.delivery.note}" styleClass="ui-lg-6"/>
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <h:outputText value="Đơn vị vận chuyển: " styleClass="ui-lg-5"/>
+                        <p:selectOneMenu value="#{CheckoutBean.delivery.shippingAgent.name}"
+                                         style="vertical-align: middle;" styleClass="ui-lg-6">
+
+                            <p:ajax event="change" listener="#{CheckoutBean.changeShippingAgent}"
+                                    update="shippingTime shippingFee total1 total2 total3"/>
+                            <f:selectItems value="#{CheckoutBean.shippingAgentNames}"/>
+
+                        </p:selectOneMenu>
+                        <div class="ui-lg-12">
+                            <h:outputText id="shippingTime" value="(Thời gian vận chuyển:
+                        #{CheckoutBean.delivery.shippingAgent.deliveryAverageTime} -
+                        #{CheckoutBean.delivery.shippingAgent.deliveryAverageTime+1} ngày)"
+                                          style="color: green; margin-left: 40%;"/>
+                        </div>
+
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <h:outputText value="Phí vận chuyển: " styleClass="ui-lg-5"/>
+                        <h:outputText id="shippingFee" value="#{CheckoutBean.delivery.shippingAgent.cost}"
+                                      style="font-weight: 600;" styleClass="ui-lg-6">
+                            <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
+                        </h:outputText>
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <h:outputText value="Tổng đơn hàng: " styleClass="ui-lg-5"/>
+                        <div class="ui-lg-6">
+                            <h:outputText id="total1" value="#{CheckoutBean.totalDelivery + CheckoutBean.delivery.shippingAgent.cost}"
+                                          style="font-weight: 600; color: blue;"
+                                          rendered="#{CheckoutBean.delivery.voucher.value == 0}">
+                                <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
+                            </h:outputText>
+                            <h:outputText id="total2" value="#{CheckoutBean.totalDelivery * (1 - CheckoutBean.delivery.voucher.value/100) + CheckoutBean.delivery.shippingAgent.cost}"
+                                          style="font-weight: 600; color: blue;"
+                                          rendered="#{CheckoutBean.delivery.voucher.value > 0}">
+                                <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
+                            </h:outputText>
+                            <h:outputText id="total3" value="#{CheckoutBean.totalDelivery + CheckoutBean.delivery.shippingAgent.cost}"
+                                          style="text-decoration: line-through; margin-left: 10px;"
+                                          rendered="#{CheckoutBean.delivery.voucher.value > 0}">
+                                <f:convertNumber pattern="¤#,###" currencySymbol=""/>
+                            </h:outputText>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <p:commandButton value="Đặt hàng"
+                                         action="#{CheckoutBean.actionPostDelivery()}" style="width: 33%"/>
+                    </div>
+                </div>
+
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

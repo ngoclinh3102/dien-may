@@ -5,14 +5,13 @@ package bean;
     Last modify : 2022/08/24
 */
 
-import model.CartDetail;
 import model.Customer;
 import service.CustomerService;
 import service.CustomerSessionService;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import java.util.List;
+import javax.faces.bean.ViewScoped;
 
 @ManagedBean(name = "CustomerSessionBean", eager = true)
 @SessionScoped
@@ -21,7 +20,6 @@ public class CustomerSessionBean extends BaseBean {
     private String loginID;
     private String loginPassword;
     public static Customer customer;
-
 
     /* GETTER & SETTER */
     public String getLoginID() {
@@ -43,10 +41,6 @@ public class CustomerSessionBean extends BaseBean {
     public Customer getCustomer() {
         return customer;
     }
-
-//    public static void setCustomer(Customer customer) {
-//        CustomerSessionBean.customer = customer;
-//    }
 
     /* ACTION */
     public void actionLogin() {

@@ -15,6 +15,7 @@
                 <h:outputText value="#{CartBean.totalCart}">
                     <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
                 </h:outputText>
+                <p:commandButton value="Tạo đơn hàng" action="#{CartBean.actionToCreateOrderPage()}"/>
             </div>
             <div class="card" style="width: 80%; margin: 20px auto;">
                 <h:outputText value="Giỏ hàng" style="font-weight: bold;"/>
@@ -62,10 +63,12 @@
                                              action="#{CartBean.actionRemoveProduct(cd.productCode)}"
                                              update="frmMain"
                                              style="width: 100%; height: 45px; background: red; color: white; border: none; border-radius: 5px;">
-                                <p:confirm type="popup" header="Confirmation" message="Xóa #{cd.productName} khỏi giỏ hàng?" icon="pi pi-exclamation-triangle"/>                            </p:commandButton>
+                                <p:confirm type="popup" header="Confirmation" message="Xóa #{cd.productName} khỏi giỏ hàng?" icon="pi pi-exclamation-triangle"/>
+                            </p:commandButton>
                         </p:column>
 
                     </p:dataTable>
+
                     <p:confirmPopup global="true">
                         <p:commandButton value="Hủy" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
                         <p:commandButton value="Xóa" type="button" styleClass="ui-confirm-popup-yes"/>

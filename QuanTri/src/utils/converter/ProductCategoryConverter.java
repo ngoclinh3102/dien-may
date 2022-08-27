@@ -19,12 +19,12 @@ public class ProductCategoryConverter implements Converter {
     public HashMap<String, String> getCategoryMap() {
         if (categoryMap == null) {
             categoryMap = new HashMap<>();
-            categoryMap.put(Category.air_con.toString(),"Máy điều hòa");
-            categoryMap.put(Category.fridge.toString(),"Tủ lạnh");
-            categoryMap.put(Category.laptop.toString(),"Laptop");
-            categoryMap.put(Category.phone.toString(),"Điện thoại");
-            categoryMap.put(Category.tv.toString(),"Ti vi");
-            categoryMap.put(Category.washing_machine.toString(),"Máy giặt");
+            categoryMap.put(Category.AIR_CON.toString(),"Máy điều hòa");
+            categoryMap.put(Category.FRIDGE.toString(),"Tủ lạnh");
+            categoryMap.put(Category.LAPTOP.toString(),"Laptop");
+            categoryMap.put(Category.PHONE.toString(),"Điện thoại");
+            categoryMap.put(Category.TV.toString(),"Ti vi");
+            categoryMap.put(Category.WASHING_MACHINE.toString(),"Máy giặt");
 
         }
         return categoryMap;

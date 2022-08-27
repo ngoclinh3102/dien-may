@@ -51,6 +51,7 @@ public class HomeBean extends BaseBean {
     public void actionToHomePage() {
         redirect("../ban-hang/e-commerce/home.xhtml");
     }
+
     public void actionToLoginPage() {
         redirect("../ban-hang/login.xhtml");
     }

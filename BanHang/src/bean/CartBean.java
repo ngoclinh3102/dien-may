@@ -77,6 +77,6 @@ public class CartBean extends BaseBean {
     }
 
     public void actionToCreateOrderPage() {
-        // TODO
+        redirect("../ban-hang/e-commerce/checkout.xhtml");
     }
 }
