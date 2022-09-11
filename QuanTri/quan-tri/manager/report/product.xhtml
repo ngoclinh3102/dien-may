@@ -7,18 +7,22 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
-    <ui:define name="title">index</ui:define>
+    <ui:define name="title">Thống kê</ui:define>
     <ui:define name="content">
-        <div>
-            <p:selectOneMenu>
-                <f:selectItem itemLabel="Toàn thời gian"/>
-                <f:selectItem itemLabel="12 tháng gần nhất"/>
-                <f:selectItem itemLabel="30 ngày gần nhất"/>
-                <f:selectItem itemLabel="7 ngày gần nhất"/>
-            </p:selectOneMenu>
-        </div>
-        <div class="card">
-            <p:barChart model="#{ReportBean.barModel}" style="width: 100%; height: 500px;"/>
-        </div>
+        <h:form id="frmMain">
+            <div>
+                <p:selectOneMenu value="#{ReportBean.time}">
+                    <f:selectItem itemLabel="Toàn thời gian" itemValue="999 DAY"/>
+                    <f:selectItem itemLabel="Năm vừa qua" itemValue="365 DAY"/>
+                    <f:selectItem itemLabel="Tháng vừa qua" itemValue="30 DAY"/>
+                    <f:selectItem itemLabel="Tuần vừa qua" itemValue="7 DAY"/>
+
+                    <p:ajax listener="#{ReportBean.createBarModel()}" update="frmMain"/>
+                </p:selectOneMenu>
+            </div>
+            <div class="card">
+                <p:barChart model="#{ReportBean.barModel}" style="width: 100%; height: 500px;"/>
+            </div>
+        </h:form>
     </ui:define>
 </ui:composition>

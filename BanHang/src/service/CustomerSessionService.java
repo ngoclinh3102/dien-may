@@ -550,6 +550,13 @@ public class CustomerSessionService extends BaseService {
             try {
                 int rs = getStatement().executeUpdate(sql);
                 if (rs == 1) {
+                    for (DeliveryDetail deliveryDetail : delivery.getDeliveryDetails()) {
+                        String sql2 =
+                                "UPDATE product " +
+                                        "SET bought = bought + " + deliveryDetail.getQuantity() + " " +
+                                        "WHERE `code` = '" + deliveryDetail.getProductCode() + "'";
+                        getStatement().executeUpdate(sql2);
+                    }
                     return 1;
                 }
             }

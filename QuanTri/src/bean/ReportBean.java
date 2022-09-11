@@ -31,6 +31,7 @@ import java.util.List;
 public class ReportBean extends BaseBean {
     /* DECLARE */
     private BarChartModel barModel;
+    private String time;
 
     private final List<String> bgColor = new ArrayList<>(Arrays.asList(
             "rgba(255, 99, 132, 0.2)",
@@ -82,9 +83,20 @@ public class ReportBean extends BaseBean {
         this.barModel = barModel;
     }
 
+    public String getTime() {
+        if (time == null || time.equals("")) {
+            time = "365 DAY";
+        }
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     /* METHOD */
     public void createBarModel() {
-        List<ReportProduct> list = ReportService.top5Product("31 DAY");
+        List<ReportProduct> list = ReportService.top5Product(getTime());
         System.out.println(list);
 
         barModel = new BarChartModel();
