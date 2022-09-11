@@ -2,7 +2,7 @@ package bean;
 
 /*
     Author      : Ngoc Linh, Vu
-    Last modify : 2022/08/24
+    Last modify : 2022/09/04
 */
 
 import model.Customer;
@@ -11,7 +11,7 @@ import service.CustomerSessionService;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
+import java.time.LocalDate;
 
 @ManagedBean(name = "CustomerSessionBean", eager = true)
 @SessionScoped
@@ -76,11 +76,6 @@ public class CustomerSessionBean extends BaseBean {
         customer = null;
     }
 
-    public void actionSignUp(boolean i) {
-        // TODO
-        System.out.println(i);
-    }
-
     public void actionAddCart(String productCode) {
         if (customer == null) {
             showWarn("Vui lòng đăng nhập trước khi thao tác!!");
@@ -95,4 +90,6 @@ public class CustomerSessionBean extends BaseBean {
             }
         }
     }
+
+    /* VALIDATION */
 }

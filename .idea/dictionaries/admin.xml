@@ -2,18 +2,25 @@
   <dictionary name="admin">
     <words>
       <w>chưa</w>
+      <w>chạy</w>
       <w>chắc</w>
       <w>chọn</w>
       <w>csdl</w>
+      <w>cung</w>
       <w>công</w>
       <w>dien</w>
+      <w>dụng</w>
+      <w>giao</w>
       <w>giảm</w>
       <w>giặt</w>
       <w>hehe</w>
       <w>hiệu</w>
+      <w>hoàn</w>
       <w>hoặc</w>
+      <w>huhu</w>
       <w>hàng</w>
       <w>khuyến</w>
+      <w>khách</w>
       <w>không</w>
       <w>khẩu</w>
       <w>linh</w>
@@ -24,34 +31,45 @@
       <w>lệnh</w>
       <w>ngoc</w>
       <w>nguyên</w>
+      <w>ngọc</w>
+      <w>nhất</w>
+      <w>nhận</w>
       <w>nhập</w>
       <w>nhật</w>
       <w>phiếu</w>
       <w>phẩm</w>
       <w>quan</w>
       <w>quản</w>
+      <w>sàng</w>
       <w>thao</w>
       <w>thoại</w>
+      <w>throwables</w>
       <w>thành</w>
+      <w>thái</w>
       <w>thêm</w>
       <w>thương</w>
       <w>thất</w>
       <w>thấy</w>
+      <w>thống</w>
       <w>thực</w>
+      <w>tiếp</w>
       <w>tiết</w>
       <w>trong</w>
       <w>truy</w>
       <w>trình</w>
       <w>trước</w>
       <w>trường</w>
+      <w>trạng</w>
       <w>trống</w>
       <w>tính</w>
       <w>xong</w>
+      <w>đang</w>
       <w>điều</w>
       <w>điện</w>
       <w>đúng</w>
       <w>đăng</w>
       <w>được</w>
+      <w>định</w>
     </words>
   </dictionary>
 </component>

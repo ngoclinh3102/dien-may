@@ -1,11 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
-</html>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">#{ProductDisplayBean.product.name}</ui:define>
+
+    <ui:define name="content">
+        <h:form id="frmMain">
+            <div class="card" style="width: 80%; margin: 20px auto; padding: 50px;">
+                <div class="ui-lg-12">
+                    [<h:outputText value="#{ProductDisplayBean.product.brand}"/>]
+                    [<h:outputText value="#{ProductDisplayBean.product.categoryCode}"
+                                   converter="ProductCategoryConverter"/>]
+                    <h:outputText value="#{ProductDisplayBean.product.name}" style="font-weight: 600;"/>
+                </div>
+                <div class="ui-g">
+
+                    <!-- LEFT -->
+                    <div class="ui-lg-5">
+                        <div class="ui-g">
+
+                            <div class="ui-lg-1 no-padding">
+                                <p:commandButton onclick="PF('switcher').previous()"
+                                                 icon="pi pi-chevron-left "
+                                                 styleClass="switch-image-button"/>
+                            </div>
+
+                            <div class="ui-lg-10 no-padding">
+                                <p:imageSwitch widgetVar="switcher" id="manuelSwitcher"
+                                               effect="cover"
+                                               slideshowAuto="false">
+                                    <ui:repeat value="#{ProductDisplayBean.product.images}" var="image"
+                                               id="manuelSwitcherImages">
+                                        <p:graphicImage id="img" name="/image/#{image}" width="100%"/>
+                                    </ui:repeat>
+                                </p:imageSwitch>
+                            </div>
+
+                            <div class="ui-lg-1 no-padding">
+                                <p:commandButton onclick="PF('switcher').next()"
+                                                 icon="pi pi-chevron-right"
+                                                 styleClass="switch-image-button"/>
+                            </div>
+
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <h:outputText value="#{ProductDisplayBean.product.price}" style="font-weight: bold; color: red;">
+                                <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
+                            </h:outputText>
+                            <h:outputText value="#{ProductDisplayBean.product.price0}"
+                                          rendered="#{ProductDisplayBean.product.price0 > ProductDisplayBean.product.price}"
+                                          style="text-decoration: line-through;">
+                                <f:convertNumber pattern="¤#,###" currencySymbol=""/>
+                            </h:outputText>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <p:commandButton value="Thêm vào giỏ hàng"
+                                             action="#{CustomerSessionBean.actionAddCart(ProductDisplayBean.product.code)}"
+                                             icon="fa fa-cart-plus"
+                                             rendered="#{ProductDisplayBean.product.inventory>0}"
+                                             style="float: right; font-size: 0.66rem !important;"/>
+                            <p:commandButton value="Hết hàng"
+                                             icon="fa fa-exclamation"
+                                             rendered="#{ProductDisplayBean.product.inventory==0}"
+                                             style="float: right; font-size: 0.66rem !important; background: #4c4c4c;"/>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="ui-lg-7" style="padding: 10px 50px !important;">
+                        <div class="ui-g">
+                            <p:scrollPanel mode="native" style="width: 100%; max-height: 260px; margin-bottom: 20px; ">
+                                #{ProductDisplayBean.product.desc}
+                            </p:scrollPanel>
+                        </div>
+                        <div class="ui-g">
+                            <div class="ui-lg-3" style="color: #898989;">Bảo hành :</div>
+                            <div class="ui-lg-9">
+                                <h:outputText value="#{ProductDisplayBean.product.warranty} tháng"
+                                              rendered="#{ProductDisplayBean.product.warranty>0}"/>
+                                <h:outputText value="Không hỗ trợ"
+                                              rendered="#{ProductDisplayBean.product.warranty==0}"/>
+                            </div>
+                        </div>
+                        <div class="ui-g">
+                            <div class="ui-lg-3" style="color: #898989;">Đã bán :</div>
+                            <div class="ui-lg-9">#{ProductDisplayBean.product.bought}</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

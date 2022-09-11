@@ -4,7 +4,10 @@
     <file url="file://$PROJECT_DIR$/BanHang/src/service/CustomerSessionService.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/QuanTri/src/service/BaseService.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/QuanTri/src/service/CustomerService.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/QuanTri/src/service/DeliveryService.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/QuanTri/src/service/EmployeeService.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/QuanTri/src/service/ProductService.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/QuanTri/src/service/ReportService.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/QuanTri/src/service/ShippingAgentService.java" dialect="GenericSQL" />
   </component>
 </project>

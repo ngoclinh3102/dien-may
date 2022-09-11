@@ -46,7 +46,4 @@ public class CustomerDetailBean extends BaseBean {
     }
 
     /*  RENDERED  */
-    public void cba() {
-        System.out.println("status: " + customer.isStatus());
-    }
 }

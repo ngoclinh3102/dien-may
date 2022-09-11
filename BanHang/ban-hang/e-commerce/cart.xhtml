@@ -12,10 +12,11 @@
     <ui:define name="content">
         <h:form id="frmMain">
             <div class="card" style="width: 80%; margin: 20px auto;">
+                Tổng cộng:
                 <h:outputText value="#{CartBean.totalCart}">
                     <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
                 </h:outputText>
-                <p:commandButton value="Tạo đơn hàng" action="#{CartBean.actionToCreateOrderPage()}"/>
+                <p:commandButton value="Tạo đơn hàng" action="#{CartBean.actionToCreateOrderPage()}" style="margin-left: 66%;"/>
             </div>
             <div class="card" style="width: 80%; margin: 20px auto;">
                 <h:outputText value="Giỏ hàng" style="font-weight: bold;"/>

@@ -1,10 +1,16 @@
 package model;
 
+/*
+    Author      : Ngoc Linh, Vu
+    Last modify : 2022/08/25
+*/
+
 public class DeliveryDetail {
     private int deliveryID;
     private String productCode;
     private int quantity;
     private int productPrice;
+    //
     private String productName;
     private String productThumbnail;
 
@@ -54,5 +60,17 @@ public class DeliveryDetail {
 
     public void setProductPrice(int productPrice) {
         this.productPrice = productPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "DeliveryDetail{" +
+                "deliveryID=" + deliveryID +
+                ", productCode='" + productCode + '\'' +
+                ", quantity=" + quantity +
+                ", productPrice=" + productPrice +
+                ", productName='" + productName + '\'' +
+                ", productThumbnail='" + productThumbnail + '\'' +
+                '}';
     }
 }

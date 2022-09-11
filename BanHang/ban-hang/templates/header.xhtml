@@ -22,13 +22,20 @@
             <div class="ui-lg-10 ui-g no-padding" style="align-items: end;">
                 <div class="ui-lg-8 no-padding">
                     <div class="table-input-wrap" style="left: 64%;">
-                        <p:inputText styleClass="table-input" placeholder="Tìm kiếm..."/>
-                        <p:commandButton icon="fa fa-search" styleClass="search-btn"/>
+                        <p:inputText value="#{HomeBean.filter.search}"
+                                     placeholder="Bạn muốn tìm gì..."
+                                     styleClass="table-input">
+                        </p:inputText>
+                        <p:commandButton action="#{HomeBean.actionFilter()}"
+                                         icon="fa fa-search"
+                                         update="frmMain frmMenu"
+                                         styleClass="search-btn"/>
                     </div>
                 </div>
                 <div class="ui-lg-4 no-padding" style="text-align: right; padding-right: 10px;">
                     <p:tooltip for="order-btn" value="Đơn hàng" position="top" style="font-size: 0.6rem;"/>
                     <p:commandButton id="order-btn"
+                                     action="#{HomeBean.actionToDeliveryPage()}"
                                      rendered="#{CustomerSessionBean.customer ne null}"
                                      icon="fa fa-file-text" styleClass="order-btn"/>
 

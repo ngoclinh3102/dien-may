@@ -1,11 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">Đăng ký</ui:define>
+
+    <ui:define name="stylesheet">
+        <link rel="stylesheet" href="resources/css/style.css"/>
+        <link rel="stylesheet" href="resources/css/font-awesome-4.7.0/css/font-awesome.min.css"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="frmMain">
+            <div class="card" style="width: 50% !important; margin-left: 25%; margin-top: 50px; margin-bottom: 100px;">
+                <div class="ui-g">
+
+                    <div class="ui-lg-3"></div>
+
+                    <!--đăng ký-->
+                    <div class="ui-lg-6">
+                        <div style="font-weight: 600; margin-bottom: 20px; text-align: center;">
+                            <h:outputText value="Đăng ký"/>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <h:outputText value="Nhập họ:"/>
+                            <br/>
+                            <p:inputText value="#{SignUpBean.signUpCustomer.lastName}"
+                                         style="width: 100%;"/>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <h:outputText value="Nhập tên:"/>
+                            <br/>
+                            <p:inputText value="#{SignUpBean.signUpCustomer.firstName}"
+                                         style="width: 100%;"/>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <h:outputText value="Nhập ngày sinh:"/>
+                            <br/>
+                            <p:datePicker value="#{SignUpBean.signUpDate}" showIcon="true" showOnFocus="false" pattern="yyyy-MM-dd"/>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <h:outputText value="Nhập số điện thoại:"/>
+                            <br/>
+                            <p:inputText value="#{SignUpBean.signUpCustomer.phone}"
+                                         style="width: 100%;"/>
+                        </div>
+                        <div style="margin-bottom: 10px;">
+                            <h:outputText value="Nhập email:"/>
+                            <br/>
+                            <p:inputText value="#{SignUpBean.signUpCustomer.mail}"
+                                         style="width: 100%;"/>
+                        </div>
+                        <div style="margin-bottom: 30px;">
+                            <h:outputText value="Mật khẩu:"/>
+                            <br/>
+                            <p:password value="#{SignUpBean.signUpCustomer.password}"
+                                        style="width: 100%;"/>
+                        </div>
+                        <div>
+                            <p:commandButton value="Đăng ký"
+                                             action="#{SignUpBean.actionSignUp(true)}"
+                                             update="frmMain"
+                                             style="float: right;"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-lg-3"></div>
+
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

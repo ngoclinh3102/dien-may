@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">Đơn hàng của tôi</ui:define>
+
+    <ui:define name="content">
+        <h:form id="frmMain">
+
+            <!--HEADER AND FILTER-->
+            <div class="card ui-g" style="width: 80%; margin: 10px auto;">
+                <div class="ui-lg-9">
+                    <h:outputText value="Đơn hàng của tôi"/>
+                </div>
+                <div class="ui-lg-3">
+                    <p:selectOneMenu value="#{CustomerDeliveryBean.status}" >
+                        <f:selectItem itemLabel="Tất cả" itemValue="all"/>
+                        <f:selectItems value="#{DeliveryStatusConverter.deliveryStatusHashMap.entrySet()}"
+                                       var="status"
+                                       itemLabel="#{status.value}" itemValue="#{status.key}"/>
+
+                        <p:ajax listener="#{CustomerDeliveryBean.actionFilterDelivery()}" update="frmMain"/>
+                    </p:selectOneMenu>
+                </div>
+            </div>
+
+            <!--LIST-->
+            <div class="card" style="width: 80%; margin: 10px auto;">
+                <p:dataTable value="#{CustomerDeliveryBean.deliveries}" var="delivery"
+                             emptyMessage="Không tìm thấy dữ liệu đơn hàng."
+                             paginator="true" paginatorPosition="bottom" rows="5"
+                             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,{ShowAll|'Tất cả'}"
+                             style="width: 100%;">
+
+                    <p:column headerText="ID" width="5%">
+                        <a href="delivery-detail.xhtml?id=#{delivery.id}">
+                            <h:outputText value="#{delivery.id}"/>
+                        </a>
+                    </p:column>
+
+                    <p:column headerText="Ngày đặt" width="10%">
+                        <h:outputText value="#{delivery.createdAt}"/>
+                    </p:column>
+
+                    <p:column headerText="Địa chỉ giao hàng" width="20%">
+                        <h:outputText value="#{delivery.shippingAddress}"/>
+                    </p:column>
+
+                    <p:column headerText="Đơn vị vận chuyển" width="20%">
+                        <h:outputText value="#{delivery.shippingAgent.name}"/>
+                    </p:column>
+
+                    <p:column headerText="Trạng thái" width="15%">
+                        <h:outputText value="#{delivery.status}" converter="DeliveryStatusConverter"
+                                      styleClass="status-#{delivery.status}"/>
+                    </p:column>
+
+                    <p:column headerText="Tổng cộng" width="10%">
+                        <h:outputText value="#{CustomerDeliveryBean.totalDelivery(delivery)}"
+                                      style="font-weight: 600; color: blue;">
+                            <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
+                        </h:outputText>
+                    </p:column>
+
+                </p:dataTable>
+
+            </div>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

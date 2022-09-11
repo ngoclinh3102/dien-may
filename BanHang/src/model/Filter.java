@@ -5,26 +5,19 @@ package model;
     Last modify : 2022/08/24
 */
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Filter {
     /* DECLARE */
     private String search; //product.name
     private String brand;
-    private List<String> categories;
-    private float priceMin;
-    private float priceMax;
-    private boolean bestSelling;
+    private String categories;
+    private String ascendant;
 
     /* CONSTRUCTOR */
     public Filter() {
-        this.search = "";
-        this.brand = "";
-        this.categories = new ArrayList<>();
-        this.priceMin = 0;
-        this.priceMax = 999999999;
-        this.bestSelling = false;
+        search = "";
+        brand = "all";
+        categories = "all";
+        ascendant = "";
     }
 
     /* SETTER & GETTER */
@@ -44,36 +37,29 @@ public class Filter {
         this.brand = brand;
     }
 
-    public List<String> getCategories() {
+    public String getCategories() {
         return categories;
     }
 
-    public void setCategories(List<String> categories) {
+    public void setCategories(String categories) {
         this.categories = categories;
     }
 
-    public float getPriceMin() {
-        return priceMin;
+    public String getAscendant() {
+        return ascendant;
     }
 
-    public void setPriceMin(float priceMin) {
-        this.priceMin = priceMin;
+    public void setAscendant(String ascendant) {
+        this.ascendant = ascendant;
     }
 
-    public float getPriceMax() {
-        return priceMax;
+    @Override
+    public String toString() {
+        return "Filter{" +
+                "search='" + search + '\'' +
+                ", brand='" + brand + '\'' +
+                ", categories='" + categories + '\'' +
+                ", ascendant='" + ascendant + '\'' +
+                '}';
     }
-
-    public void setPriceMax(float priceMax) {
-        this.priceMax = priceMax;
-    }
-
-    public boolean isBestSelling() {
-        return bestSelling;
-    }
-
-    public void setBestSelling(boolean bestSelling) {
-        this.bestSelling = bestSelling;
-    }
-
 }

@@ -8,8 +8,23 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <body>
 <ui:composition>
-    <div class="div-header">
-    </div>
+    <h:form id="frmHeader">
+        <div class="div-header">
+            <p:graphicImage name="logo.png" library="image"/>
+        </div>
+        <div style="background: #4a90e2; text-align: right; padding: 10px;">
+            <p:commandButton value="#{EmployeeSessionBean.employee.id} - #{EmployeeSessionBean.employee.lastName} #{EmployeeSessionBean.employee.firstName}"
+                             icon="fa fa-user-md"
+                             styleClass="logout-btn" style="width: 300px !important;"/>
+
+            <p:tooltip for="logout-btn" value="Đăng xuất" position="top" style="font-size: 0.6rem;"/>
+            <p:commandButton id="logout-btn"
+                             action="#{EmployeeSessionBean.actionLogout()}"
+                             update="frmHeader"
+                             icon="fa fa-sign-out"
+                             styleClass="logout-btn"/>
+        </div>
+    </h:form>
 </ui:composition>
 </body>
 </html>

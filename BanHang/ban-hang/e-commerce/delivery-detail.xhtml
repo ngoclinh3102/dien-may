@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/templates/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">Chi tiết đơn hàng</ui:define>
+
+    <ui:define name="content">
+        <h:form id="frmMain">
+            <div class="ui-g" style="padding: 20px; justify-content: space-around;">
+
+                <!--LEFT : LIST PRODUCT-->
+                <div class="card ui-lg-6">
+                    <h3>Danh sách sản phẩm</h3>
+                    <p:dataTable value="#{CustomerDeliveryBean.delivery.deliveryDetails}" var="dd"
+                                 style="width: 100%;">
+
+                        <p:column headerText="Ảnh" width="15%">
+                            <p:graphicImage name="#{dd.productThumbnail}" alt="hổng thấy ảnh pé ơi"
+                                            library="image"
+                                            style="width: 100%;"/>
+                        </p:column>
+
+                        <p:column headerText="Sản phẩm" width="30%">
+                            <a href="http://youtube.com" target="_blank" style="font-weight: 700;">
+                                <h:outputText value="#{dd.productName}"/>
+                            </a>
+                        </p:column>
+
+                        <p:column headerText="Đơn giá" width="20%">
+                            <h:outputText value="#{dd.productPrice}" style="font-weight: 600; color: blue;">
+                                <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Số lượng" width="15%">
+                            <h:outputText value="#{dd.quantity}"/>
+                        </p:column>
+
+                    </p:dataTable>
+                    <div>
+                        <h:outputText value="Tổng cộng: " style=" margin-left: 44%;"/>
+                        <h:outputText value="#{CustomerDeliveryBean.totalProductOnly(CustomerDeliveryBean.delivery)}"
+                                      style="font-weight: 600; color: blue;">
+                            <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
+                        </h:outputText>
+                    </div>
+                </div>
+
+                <!--RIGHT : ORDER INFO-->
+                <div class="card ui-lg-5">
+                    <div style="text-align: center;">
+                        <h3>THÔNG TIN ĐƠN HÀNG</h3>
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <h:outputText value="Địa chỉ giao hàng: " styleClass="ui-lg-5" style="color: #898989;"/>
+                        <h:outputText value="#{CustomerDeliveryBean.delivery.shippingAddress}"
+                                      styleClass="ui-lg-6"/>
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <h:outputText value="Hình thức thanh toán:" class="ui-lg-5" style="color: #898989;"/>
+                        <h:outputText value="#{CustomerDeliveryBean.delivery.paymentMethod}" class="ui-lg-6"/>
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <h:outputText value="Trạng thái: " styleClass="ui-lg-5" style="color: #898989;"/>
+                        <div class="ui-lg-6">
+                            <h:outputText value="#{CustomerDeliveryBean.delivery.status}"
+                                          styleClass="status-#{CustomerDeliveryBean.delivery.status}">
+                                <f:converter converterId="DeliveryStatusConverter"/>
+                            </h:outputText>
+                        </div>
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <h:outputText value="Ghi chú đơn hàng: " styleClass="ui-lg-5" style="color: #898989;"/>
+                        <h:outputText value="#{CustomerDeliveryBean.delivery.note}" styleClass="ui-lg-6"/>
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <h:outputText value="Đơn vị vận chuyển: " styleClass="ui-lg-5" style="color: #898989;"/>
+                        <h:outputText value="#{CustomerDeliveryBean.delivery.shippingAgent.name}"
+                                      style="vertical-align: middle;" styleClass="ui-lg-6"/>
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <h:outputText value="Phí vận chuyển: " styleClass="ui-lg-5" style="color: #898989;"/>
+                        <h:outputText id="shippingFee" value="#{CustomerDeliveryBean.delivery.shippingAgent.cost}"
+                                      style="font-weight: 600;" styleClass="ui-lg-6">
+                            <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
+                        </h:outputText>
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <h:outputText value="Tổng đơn hàng: " styleClass="ui-lg-5" style="color: #898989;"/>
+                        <div class="ui-lg-6">
+                            <h:outputText value="#{CustomerDeliveryBean.totalDelivery(CustomerDeliveryBean.delivery)}"
+                                          style="font-weight: 600; color: blue;">
+                                <f:convertNumber pattern="¤#,###" currencySymbol="₫ "/>
+                            </h:outputText>
+                            <p:badge id="bade"
+                                     value="-#{CustomerDeliveryBean.delivery.voucher.value}%"
+                                     severity="info"
+                                     rendered="#{CustomerDeliveryBean.delivery.voucher.value>0}"/>
+                            <p:tooltip for="bade" value="#{CustomerDeliveryBean.delivery.voucher.code}"/>
+                        </div>
+                    </div>
+
+                    <div class="ui-g" style="margin: 10px;">
+                        <p:commandButton value="Hủy đơn"
+                                         action="#{CustomerDeliveryBean.actionCancelDelivery()}"
+                                         update="frmMain"
+                                         rendered="#{CustomerDeliveryBean.renderedCancelDeliveryBtn()}"
+                                         styleClass="ui-button-danger" style="margin-right: 15px;"/>
+                        <p:commandButton value="Đổi/trả hàng"
+                                         update="frmMain"
+                                         rendered="#{CustomerDeliveryBean.delivery.status eq 'DELIVERED'}"
+                                         styleClass="ui-button-warning"
+                                         style="margin-right: 15px;"/>
+                        <p:commandButton value="Đã nhận hàng"
+                                         action="#{CustomerDeliveryBean.actionFulfillDelivery()}"
+                                         update="frmMain"
+                                         rendered="#{CustomerDeliveryBean.renderedFulFillDeliveryBtn()}"
+                                         style="margin-right: 15px;"/>
+                    </div>
+
+                </div>
+
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

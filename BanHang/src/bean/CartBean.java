@@ -2,7 +2,7 @@ package bean;
 
 /*
     Author      : Ngoc Linh, Vu
-    Last modify : 2022/08/24
+    Last modify : 2022/08/28
 */
 
 import model.CartDetail;
@@ -77,6 +77,11 @@ public class CartBean extends BaseBean {
     }
 
     public void actionToCreateOrderPage() {
-        redirect("../ban-hang/e-commerce/checkout.xhtml");
+        if (getTotalCart()==0) {
+            showWarn("Vui lòng chọn sản phẩm để đặt hàng!!");
+        }
+        else {
+            redirect("../ban-hang/e-commerce/checkout.xhtml");
+        }
     }
 }

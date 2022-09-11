@@ -11,7 +11,10 @@ import service.ProductService;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.text.Normalizer;
+import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @ManagedBean(name = "HomeBean", eager = true)
 @ViewScoped
@@ -46,6 +49,47 @@ public class HomeBean extends BaseBean {
         filter = null;
     }
 
+    public void actionFilter() {
+        List<Product> list = ProductService.getProducts(99);
+        System.out.println("filter: " + filter);
+
+        if (!filter.getSearch().equals("")) {
+            list.removeIf(product -> !removeAccent(product.getName()).contains(removeAccent(filter.getSearch())));
+        }
+
+        if (!filter.getBrand().equals("all")) {
+            list.removeIf(product -> !product.getBrand().equals(filter.getBrand()));
+        }
+
+        if (!filter.getCategories().equals("all")) {
+            list.removeIf(product -> !product.getCategoryCode().equals(filter.getCategories()));
+        }
+
+        if (!filter.getAscendant().equals("")) {
+//            list.removeIf(product -> (product.getInventory()==0));
+
+            if (filter.getAscendant().equals("true")) {
+                list.sort(Comparator.comparingInt(Product::getPrice));
+            }
+            else {
+                list.sort(Comparator.comparingInt(Product::getPrice).reversed());
+            }
+        }
+
+        products = list;
+    }
+
+    private String removeAccent(String s) {
+        String temp = s.toLowerCase();
+        temp = Normalizer.normalize(temp, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        temp = pattern.matcher(temp).replaceAll("");
+        temp = temp.replaceAll("đ", "d");
+        temp = temp.replaceAll(" ", "");
+
+        return temp;
+    }
+
 
     /* REDIRECT */
     public void actionToHomePage() {
@@ -62,5 +106,9 @@ public class HomeBean extends BaseBean {
 
     public void actionToCartPage() {
         redirect("../ban-hang/e-commerce/cart.xhtml");
+    }
+
+    public void actionToDeliveryPage() {
+        redirect("../ban-hang/e-commerce/delivery.xhtml");
     }
 }

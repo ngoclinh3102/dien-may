@@ -92,7 +92,7 @@ public class CheckoutBean extends BaseBean {
         if (validationForm()) {
             int rs = CustomerSessionService.postDelivery(delivery);
             if (rs > 0) {
-                redirect("../ban-hang/e-commerce/order.xhtml?id=" + rs);
+                redirect("../ban-hang/e-commerce/delivery-detail.xhtml?id=" + rs);
             }
             else {
                 showError("Post delivery have failed with code = " + rs);

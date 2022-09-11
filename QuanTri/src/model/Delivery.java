@@ -1,5 +1,10 @@
 package model;
 
+/*
+    Author      : Ngoc Linh, Vu
+    Last modify : 2022/08/25
+*/
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,6 +97,9 @@ public class Delivery {
     }
 
     public ShippingAgent getShippingAgent() {
+        if (shippingAgent == null) {
+            shippingAgent = new ShippingAgent();
+        }
         return shippingAgent;
     }
 

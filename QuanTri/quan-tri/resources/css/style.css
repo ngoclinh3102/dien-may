@@ -6,9 +6,8 @@ body {
 }
 
 .div-header {
-    height: 100px;
     background: #4a90e2;
-    padding: 1px;
+    padding: 10px;
 }
 
 .div-header h1 {
@@ -143,4 +142,92 @@ body {
     width: 50px !important;
     height: 30px !important;
     padding: 0;
+}
+
+.order-btn,
+.cart-btn,
+.profile-btn,
+.logout-btn {
+    width: 90px !important;
+    height: 40px !important;
+    margin-right: 5px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 2px white solid !important;
+}
+
+.order-btn:hover,
+.cart-btn:hover,
+.profile-btn:hover,
+.logout-btn:hover {
+    background: #1e3799 !important;
+}
+
+.order-btn:focus,
+.cart-btn:focus,
+.profile-btn:focus,
+.logout-btn:focus {
+    box-shadow: none !important;
+}
+
+/* login test */
+.username,
+.password {
+    width: 100%;
+}
+
+.username:hover,
+.password:hover {
+
+}
+
+.username:focus,
+.password:focus {
+
+}
+
+.login {
+    float: right;
+}
+
+/* DELIVERY STATUS */
+.status-READY,
+.status-CONFIRMED,
+.status-DELIVERING,
+.status-DELIVERED,
+.status-FULFILLED,
+.status-UNFULFILLED,
+.status-CANCELED {
+    border-radius: 5px !important;
+    padding: 5px;
+    font-size: 0.9em;
+}
+
+.status-READY {
+    background: #3ae374;
+    color: white;
+}
+.status-CONFIRMED {
+    background: #17c0eb;
+    color: white;
+}
+.status-DELIVERING {
+    background: #7d5fff;
+    color: white;
+}
+.status-DELIVERED {
+    background: #7158e2;
+    color: white;
+}
+.status-FULFILLED {
+    background: #c56cf0;
+    color: white;
+}
+.status-UNFULFILLED {
+    background: #4b4b4b;
+    color: white;
+}
+.status-CANCELED {
+    background: #ff9f1a;
+    color: white;
 }

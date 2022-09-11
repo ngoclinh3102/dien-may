@@ -161,16 +161,14 @@ body {
 }
 
 .search-btn {
-    height: 40px !important;
     border: none !important;
     background: transparent !important;
-    color: rebeccapurple !important;
+    color: grey !important;
     box-shadow: none !important;
 }
 
 .search-btn:hover {
-    background: #3498db !important;
-    color: white !important;
+    color: red !important;
 }
 
 .confirm-popup-no {
@@ -241,4 +239,62 @@ body {
 
 .checkbox:focus {
     box-shadow: none !important;
+}
+
+.switch-image-button {
+    width: 36px !important;
+    height: 100% !important;
+    background: transparent !important;
+    color: darkgray !important;
+    border: none !important;
+}
+
+.switch-image-button:hover {
+    color: #1e3799 !important;
+}
+
+.switch-image-button:focus {
+    box-shadow: none !important;
+}
+
+/* DELIVERY STATUS */
+.status-READY,
+.status-CONFIRMED,
+.status-DELIVERING,
+.status-DELIVERED,
+.status-FULFILLED,
+.status-UNFULFILLED,
+.status-CANCELED {
+    border-radius: 5px !important;
+    padding: 5px;
+    font-size: 0.9em;
+}
+
+.status-READY {
+    background: #3ae374;
+    color: white;
+}
+.status-CONFIRMED {
+    background: #17c0eb;
+    color: white;
+}
+.status-DELIVERING {
+    background: #7d5fff;
+    color: white;
+}
+.status-DELIVERED {
+    background: #7158e2;
+    color: white;
+}
+.status-FULFILLED {
+    background: #c56cf0;
+    color: white;
+}
+.status-UNFULFILLED {
+    background: #4b4b4b;
+    color: white;
+}
+.status-CANCELED {
+    background: #ff9f1a;
+    color: white;
 }
