@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 05/09/2022 14:41:04
+ Date: 12/09/2022 10:51:17
 */
 
 SET NAMES utf8mb4;
@@ -35,8 +35,6 @@ CREATE TABLE `cart_detail`  (
 -- ----------------------------
 -- Records of cart_detail
 -- ----------------------------
-INSERT INTO `cart_detail` VALUES (2, 'dh02', 1, 1);
-INSERT INTO `cart_detail` VALUES (2, 'tv01', 1, 1);
 
 -- ----------------------------
 -- Table structure for category
@@ -77,7 +75,7 @@ CREATE TABLE `customer`  (
   UNIQUE INDEX `uk_customer_mail`(`mail` ASC) USING BTREE,
   INDEX `ix_customer_fullname`(`first_name` ASC, `last_name` ASC) USING BTREE,
   INDEX `ix_customer_hoten`(`last_name` ASC, `first_name` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_vietnamese_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_vietnamese_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of customer
@@ -115,14 +113,22 @@ CREATE TABLE `delivery`  (
   CONSTRAINT `fk_delivery_employee` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_delivery_shipping_agent` FOREIGN KEY (`shipping_agent_code`) REFERENCES `shipping_agent` (`code`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_delivery_voucher` FOREIGN KEY (`voucher_code`) REFERENCES `voucher` (`code`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_vietnamese_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_vietnamese_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of delivery
 -- ----------------------------
-INSERT INTO `delivery` VALUES (8, '2022-08-27 23:58:35', 'Thanh toán khi nhận hàng', '97 Man Thiện', 2, NULL, 'FULFILLED', 'nothing', 'TURBOTRANS', 'ss99');
+INSERT INTO `delivery` VALUES (8, '2022-08-27 23:58:35', 'Thanh toán khi nhận hàng', '97 Man Thiện', 2, NULL, 'UNFULFILLED', 'nothing', 'TURBOTRANS', 'ss99');
 INSERT INTO `delivery` VALUES (9, '2022-09-04 18:21:08', 'Thanh toán khi nhận hàng', '97 Man Thiện', 2, NULL, 'FULFILLED', '', 'GHN', NULL);
 INSERT INTO `delivery` VALUES (10, '2022-09-04 18:22:59', 'Thanh toán khi nhận hàng', '97 Man Thiện', 2, NULL, 'FULFILLED', '', 'GHN', NULL);
+INSERT INTO `delivery` VALUES (11, '2022-09-05 20:22:09', 'Thanh toán khi nhận hàng', '97 Man Thiện', 2, NULL, 'CANCELED', '', 'GHTK', 'ss99');
+INSERT INTO `delivery` VALUES (12, '2022-09-11 17:08:21', 'Thanh toán khi nhận hàng', '97 Man Thiện', 2, NULL, 'FULFILLED', 'hehe', 'GHN', NULL);
+INSERT INTO `delivery` VALUES (13, '2022-09-11 17:09:16', 'Thanh toán khi nhận hàng', '109 Lê Văn Việt', 2, NULL, 'CONFIRMED', 'giao giờ hành chính nha bạn shipper dễ thương', 'TURBOTRANS', NULL);
+INSERT INTO `delivery` VALUES (14, '2022-09-11 17:10:35', 'Thanh toán khi nhận hàng', '666 Xa Lộ Hà Nội', 2, NULL, 'FULFILLED', 'giao hàng vào buổi chiều, cảm ơn', 'GHTK', NULL);
+INSERT INTO `delivery` VALUES (15, '2022-09-11 17:54:05', 'Thanh toán khi nhận hàng', '43 Dương Đình Hội', 2, NULL, 'READY', 'không có gì', 'GHN', NULL);
+INSERT INTO `delivery` VALUES (16, '2022-09-11 20:28:06', 'Thanh toán khi nhận hàng', '132 Nguyễn Thị Minh Khai', 2, NULL, 'FULFILLED', 'không có ghi chú', 'GHN', NULL);
+INSERT INTO `delivery` VALUES (17, '2021-09-11 20:41:02', 'Thanh toán khi nhận hàng', '97 Man Thiện', 2, NULL, 'FULFILLED', 'nothing', 'GHN', NULL);
+INSERT INTO `delivery` VALUES (18, '2022-09-11 21:38:47', 'Thanh toán khi nhận hàng', '97 Man Thiện', 2, NULL, 'FULFILLED', 'hehe', 'GHN', 'ss99');
 
 -- ----------------------------
 -- Table structure for delivery_detail
@@ -150,6 +156,28 @@ INSERT INTO `delivery_detail` VALUES (9, 'tl01', 1, 4500000);
 INSERT INTO `delivery_detail` VALUES (9, 'tv01', 1, 4800000);
 INSERT INTO `delivery_detail` VALUES (10, 'dh02', 1, 3600000);
 INSERT INTO `delivery_detail` VALUES (10, 'tv01', 1, 4800000);
+INSERT INTO `delivery_detail` VALUES (11, 'dh02', 1, 3600000);
+INSERT INTO `delivery_detail` VALUES (11, 'tv01', 1, 4800000);
+INSERT INTO `delivery_detail` VALUES (12, 'dh02', 1, 3600000);
+INSERT INTO `delivery_detail` VALUES (12, 'tv01', 1, 4800000);
+INSERT INTO `delivery_detail` VALUES (13, 'dh02', 1, 3600000);
+INSERT INTO `delivery_detail` VALUES (13, 'tv01', 1, 4800000);
+INSERT INTO `delivery_detail` VALUES (14, 'dh02', 1, 3600000);
+INSERT INTO `delivery_detail` VALUES (14, 'ip13promax', 1, 29000000);
+INSERT INTO `delivery_detail` VALUES (14, 'tv01', 1, 4800000);
+INSERT INTO `delivery_detail` VALUES (15, 'dh02', 2, 3600000);
+INSERT INTO `delivery_detail` VALUES (15, 'ip13promax', 1, 29000000);
+INSERT INTO `delivery_detail` VALUES (15, 'tl01', 1, 4500000);
+INSERT INTO `delivery_detail` VALUES (16, 'ip13mini', 1, 18500000);
+INSERT INTO `delivery_detail` VALUES (16, 'lap01', 1, 24100000);
+INSERT INTO `delivery_detail` VALUES (16, 'phone02', 1, 15900000);
+INSERT INTO `delivery_detail` VALUES (16, 'phone04', 1, 25990000);
+INSERT INTO `delivery_detail` VALUES (16, 'tv02', 1, 14500000);
+INSERT INTO `delivery_detail` VALUES (17, 'ip13mini', 6, 18500000);
+INSERT INTO `delivery_detail` VALUES (17, 'phone02', 5, 15900000);
+INSERT INTO `delivery_detail` VALUES (17, 'phone04', 6, 25990000);
+INSERT INTO `delivery_detail` VALUES (18, 'phone04', 1, 25990000);
+INSERT INTO `delivery_detail` VALUES (18, 'tv01', 1, 4800000);
 
 -- ----------------------------
 -- Table structure for discount
@@ -181,7 +209,7 @@ CREATE TABLE `employee`  (
   `status` int NOT NULL,
   `password` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_vietnamese_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_vietnamese_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of employee
@@ -341,11 +369,16 @@ CREATE TABLE `product`  (
 -- ----------------------------
 -- Records of product
 -- ----------------------------
-INSERT INTO `product` VALUES ('dh02', 'Máy lạnh Panasonic 1.5 HP', 'Thiết kế sang trọng, độc đáo: Sử dụng tông màu trắng làm tôn lên vẻ đẹp sang trọng\nTính năng lọc bụi, kháng khuẩn cao: Loại bỏ bụi bẩn trong không khí kế cả các hạt nhỏ PM2.5* như vi khuẩn, vi rút và nấm mốc.\nTính năng hút ẩm, tạo không gian khô thoáng: Vô hiệu hóa các vi sinh vật bám dính và các phần gây mùi bám dính trên bề mặt đồ vật, đồng thời hạn chế nấm mốc trên bề mặt đồ vật.\nTính năng hẹn giờ: Nhờ có chức năng hẹn giờ, bạn có thể kiểm soát được thời gian hoạt động của máy lạnh dù là ban ngày hay ban đêm.', 'PANASONIC', 'AIR_CON', 'chiếc', 12, 3600000, 3600000, 0, NULL, 1, 18, '2022-08-23 10:54:39');
-INSERT INTO `product` VALUES ('ip13promax', 'Điện thoại iPhone 13 Pro Max', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'APPLE', 'PHONE', 'chiếc', 69, 29000000, 30000000, 0, NULL, 1, 0, '2022-08-21 10:54:59');
-INSERT INTO `product` VALUES ('mg10', 'Máy giặt LG Inverter 10 kg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'LG', 'WASHING_MACHINE', 'chiếc', 0, 190, 1900000, 0, NULL, 1, 12, '2022-08-22 10:55:05');
-INSERT INTO `product` VALUES ('tl01', 'Tủ lạnh Hitachi Inverter 569L GMG', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'HITACHI', 'FRIDGE', 'chiếc', 36, 4500000, 4500000, 0, NULL, 1, 24, '2022-08-23 10:55:08');
-INSERT INTO `product` VALUES ('tv01', 'Smart Tivi OLED LG 4K 48 inch', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'LG', 'TV', 'chiếc', 451, 4800000, 5000000, 0, NULL, 1, 12, '2022-08-20 10:55:12');
+INSERT INTO `product` VALUES ('dh02', 'Máy lạnh Panasonic 1.5 HP', 'Thiết kế sang trọng, độc đáo: Sử dụng tông màu trắng làm tôn lên vẻ đẹp sang trọng\nTính năng lọc bụi, kháng khuẩn cao: Loại bỏ bụi bẩn trong không khí kế cả các hạt nhỏ PM2.5* như vi khuẩn, vi rút và nấm mốc.\nTính năng hút ẩm, tạo không gian khô thoáng: Vô hiệu hóa các vi sinh vật bám dính và các phần gây mùi bám dính trên bề mặt đồ vật, đồng thời hạn chế nấm mốc trên bề mặt đồ vật.\nTính năng hẹn giờ: Nhờ có chức năng hẹn giờ, bạn có thể kiểm soát được thời gian hoạt động của máy lạnh dù là ban ngày hay ban đêm.', 'PANASONIC', 'AIR_CON', 'chiếc', 12, 3600000, 3600000, 7, NULL, 1, 18, '2022-08-23 10:54:39');
+INSERT INTO `product` VALUES ('ip13mini', 'Điện thoại iPhone 13 mini', '<chưa có mô tả>', 'APPLE', 'PHONE', 'chiếc', 13, 18500000, 21900000, 7, NULL, 1, 0, '2022-09-11 20:24:39');
+INSERT INTO `product` VALUES ('ip13promax', 'Điện thoại iPhone 13 Pro Max', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'APPLE', 'PHONE', 'chiếc', 69, 29000000, 30000000, 33, NULL, 1, 0, '2022-08-21 10:54:59');
+INSERT INTO `product` VALUES ('lap01', 'Laptop Dell Gaming G15 5511 i5', 'Laptop Dell Gaming G15 5511 i5 (70266676) sở hữu chip Intel Core i5 11400H với GPU rời NVIDIA GeForce RTX 3050 4 GB giúp bạn sẵn sàng chiến đấu trong mọi lúc, thiết kế hầm hồ làm nổi bật cá tính và phong cách ở mọi đấu trường.', 'DELL', 'LAPTOP', 'chiếc', 13, 24100000, 27400000, 1, NULL, 1, 0, '2022-09-11 20:13:45');
+INSERT INTO `product` VALUES ('mg10', 'Máy giặt LG Inverter 10 kg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'LG', 'WASHING_MACHINE', 'chiếc', 0, 1900000, 1900000, 2, NULL, 1, 12, '2022-08-22 10:55:05');
+INSERT INTO `product` VALUES ('phone02', 'Điện thoại Xiaomi 12', 'Không chỉ gây ấn tượng bởi mức giá bán, điện thoại Xiaomi 12 còn mang đến nhiều bất ngờ hơn nữa về bộ thông số kỹ thuật và những nâng cấp đáng kể trên camera, giúp bạn có được những phút giây trải nghiệm hết sức tuyệt vời hay lưu giữ những khoảnh khắc xung quanh như một nhiếp ảnh gia thực thụ.', 'XIAOMI', 'PHONE', 'chiếc', 251, 15900000, 19000000, 6, NULL, 1, 0, '2022-09-11 20:18:18');
+INSERT INTO `product` VALUES ('phone04', 'Điện thoại Samsung Galaxy S22', 'Được cho ra mắt vào tháng 02/2022, Samsung Galaxy S22 Ultra 5G gây sốt trong cộng đồng công nghệ bởi hiệu năng mạnh mẽ, thiết kế đẳng cấp sang trọng cùng nhiều tiện ích do bút S Pen mang lại.', 'SAMSUNG', 'PHONE', 'chiếc', 21, 25990000, 30000000, 8, NULL, 1, 0, '2022-09-11 20:22:10');
+INSERT INTO `product` VALUES ('tl01', 'Tủ lạnh Hitachi Inverter 569L GMG', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'HITACHI', 'FRIDGE', 'chiếc', 36, 4500000, 4500000, 1, NULL, 1, 24, '2022-08-23 10:55:08');
+INSERT INTO `product` VALUES ('tv01', 'Smart Tivi OLED LG 4K 48 inch', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'LG', 'TV', 'chiếc', 451, 4800000, 5000000, 11, NULL, 1, 12, '2022-08-20 10:55:12');
+INSERT INTO `product` VALUES ('tv02', 'Smart Tivi Samsung 4K Crystal', 'Smart Tivi Samsung 4K 55 inch UA55AU8100 thiết kế theo phong cách AirSlim tối giản với các cạnh viền siêu mỏng tạo cảm giác màn hình không hề bị giới hạn. Tivi có 2 chân đế hình chữ V úp ngược giúp trụ vững trên tất cả mặt phẳng, bạn cũng có thể treo tivi lên tường để tiết kiệm không gian.', 'SAMSUNG', 'TV', 'chiếc', 78, 14500000, 20000000, 1, NULL, 1, 0, '2022-09-11 20:09:19');
 
 -- ----------------------------
 -- Table structure for product_img
@@ -386,6 +419,13 @@ INSERT INTO `product_img` VALUES (83, 'tv1.jpg', 'tv01');
 INSERT INTO `product_img` VALUES (84, 'tv2.jpg', 'tv01');
 INSERT INTO `product_img` VALUES (85, 'tv3.jpg', 'tv01');
 INSERT INTO `product_img` VALUES (86, 'tv4.jpg', 'tv01');
+INSERT INTO `product_img` VALUES (88, 'tv11.jpg', 'tv02');
+INSERT INTO `product_img` VALUES (89, 'lap1.jpg', 'lap01');
+INSERT INTO `product_img` VALUES (90, 'lap2.jpg', 'lap01');
+INSERT INTO `product_img` VALUES (91, 'lap3.jpg', 'lap01');
+INSERT INTO `product_img` VALUES (92, 'phone11.jpg', 'phone02');
+INSERT INTO `product_img` VALUES (93, 'phone21.jpg', 'phone04');
+INSERT INTO `product_img` VALUES (94, 'phone31.jpg', 'ip13mini');
 
 -- ----------------------------
 -- Table structure for shipping_agent
@@ -426,7 +466,8 @@ CREATE TABLE `voucher`  (
 -- Records of voucher
 -- ----------------------------
 INSERT INTO `voucher` VALUES ('<none>', '<none>', 0, 999999999, 0, '2022-08-28 11:01:18', '2022-09-09 11:01:23');
-INSERT INTO `voucher` VALUES ('ss99', 'Siêu Sale Tháng 9', 9.9, 1, 1, '2022-08-27 15:06:54', '2022-09-09 15:07:00');
+INSERT INTO `voucher` VALUES ('s8', 'Sale Đầu Tháng 8', 8, 999999999, 0, '2022-08-04 20:45:38', '2022-08-08 20:45:41');
+INSERT INTO `voucher` VALUES ('ss99', 'Siêu Sale Tháng 9', 9.9, 6, 3, '2022-08-27 15:06:54', '2022-09-14 15:07:00');
 
 -- ----------------------------
 -- Procedure structure for SP_ADMINLOGIN
